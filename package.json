@@ -1,0 +1,38 @@
+{
+  "name": "pinejs-client-supertest",
+  "version": "0.1.0",
+  "description": "This module provides the nodejs interface for the pinejs API using request.",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balena-io-modules/pinejs-client-supertest.git"
+  },
+  "keywords": [
+    "pinejs",
+    "pinejs-client",
+    "supertest"
+  ],
+  "author": "Thodoris Greasidis <thodoris@balena.io>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/balena-io-modules/pinejs-client-supertest/issues"
+  },
+  "homepage": "https://github.com/balena-io-modules/pinejs-client-supertest#readme",
+  "files": [
+    "build/"
+  ],
+  "scripts": {
+    "build": "npm run lint && tsc",
+    "lint": "balena-lint --typescript src",
+    "lint-fix": "balena-lint --typescript --fix src",
+    "test": "npm run build",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@balena/lint": "^5.0.4",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7",
+    "typescript": "^3.8.3"
+  }
+}
