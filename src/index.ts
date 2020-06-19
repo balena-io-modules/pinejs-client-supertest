@@ -1,5 +1,4 @@
-import * as Bluebird from 'bluebird';
-import { PinejsClientCoreFactory } from 'pinejs-client-core';
+import { PinejsClientCore, Params } from 'pinejs-client-core';
 import type * as express from 'express';
 import type { CallbackHandler, Response, Test } from 'supertest';
 import supertest from './supertest';
@@ -39,21 +38,12 @@ interface BackendParams {
 }
 
 /** A pine testing client fused with the api of supertest */
-export class PineTest extends PinejsClientCoreFactory(Bluebird)<
-	PineTest,
-	PromiseResult,
-	PromiseResult
-> {
-	constructor(
-		params: PinejsClientCoreFactory.Params,
-		public backendParams: BackendParams,
-	) {
+export class PineTest extends PinejsClientCore<PineTest> {
+	constructor(params: Params, public backendParams: BackendParams) {
 		super(params);
 	}
 
-	public get<T = any>(
-		params: PinejsClientCoreFactory.Params,
-	): PromiseResult<T> {
+	public get<T = any>(params: Params): PromiseResult<T> {
 		// Use a different const, since if we just re-assign `params`
 		// inside the `expect(() => {})` TS forgets that it's ensured
 		// to be a ParamsObj and will complain.
@@ -73,9 +63,7 @@ export class PineTest extends PinejsClientCoreFactory(Bluebird)<
 		});
 	}
 
-	public post<T = any>(
-		params: PinejsClientCoreFactory.Params,
-	): PromiseResult<T> {
+	public post<T = any>(params: Params): PromiseResult<T> {
 		return super.post(params);
 	}
 
@@ -87,7 +75,7 @@ export class PineTest extends PinejsClientCoreFactory(Bluebird)<
 	}: {
 		method: supportedMethod;
 		url: string;
-		body: PinejsClientCoreFactory.ParamsObj['body'];
+		body: Params['body'];
 		user?: UserParam;
 	}) {
 		const { app } = this.backendParams;
