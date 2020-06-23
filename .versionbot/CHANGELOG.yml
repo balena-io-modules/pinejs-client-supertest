@@ -1,33 +1,43 @@
 - commits:
-  - author: Thodoris Greasidis
-    body: ""
-    footers:
-      change-type: minor
-      signed-off-by: Thodoris Greasidis <thodoris@balena.io>
-    hash: 9f7589f3287edcf6d73dba9ada6ee04e09c4b623
-    subject: Add method overrides to provide supertest typings in the results
-  - author: Thodoris Greasidis
-    body: ""
-    footers:
-      change-type: major
-    hash: 57db30389a6adb270ab63bbc4c9736b587ce0637
-    subject: Update pinejs-client-core to v6
-  - author: Thodoris Greasidis
-    body: ""
-    footers:
-      change-type: major
-      signed-off-by: Thodoris Greasidis <thodoris@balena.io>
-    hash: ddc881c211c4e035e5e9848b94df92aa6c7e7242
-    subject: Bump build target to es2018
-  date: "2020-06-22T11:29:45Z"
+    - subject: Add a .versionbot/CHANGELOG.yml for nested changelogs
+      hash: 9c501462319d5969ac1dbfa4d0dd955ee1559cce
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+  version: 1.0.1
+  date: 2020-06-23T11:30:16.175Z
+- commits:
+    - author: Thodoris Greasidis
+      body: ''
+      footers:
+        change-type: minor
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      hash: 9f7589f3287edcf6d73dba9ada6ee04e09c4b623
+      subject: Add method overrides to provide supertest typings in the results
+    - author: Thodoris Greasidis
+      body: ''
+      footers:
+        change-type: major
+      hash: 57db30389a6adb270ab63bbc4c9736b587ce0637
+      subject: Update pinejs-client-core to v6
+    - author: Thodoris Greasidis
+      body: ''
+      footers:
+        change-type: major
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      hash: ddc881c211c4e035e5e9848b94df92aa6c7e7242
+      subject: Bump build target to es2018
+  date: '2020-06-22T11:29:45Z'
   version: 1.0.0
 - commits:
-  - author: Thodoris Greasidis
-    body: ""
-    footers:
-      change-type: minor
-      signed-off-by: Thodoris Greasidis <thodoris@balena.io>
-    hash: e4b735ab2b4ad9faa610bd74677b571a005ed09a
-    subject: Initial code commit
-  date: "2020-04-29T12:24:07Z"
+    - author: Thodoris Greasidis
+      body: ''
+      footers:
+        change-type: minor
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      hash: e4b735ab2b4ad9faa610bd74677b571a005ed09a
+      subject: Initial code commit
+  date: '2020-04-29T12:24:07Z'
   version: 0.2.0
