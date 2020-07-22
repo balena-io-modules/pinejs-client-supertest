@@ -1,0 +1,4 @@
+type: 'node'
+upstream:
+  - repo: 'pinejs-client-core'
+    url: 'https://github.com/balena-io/pinejs-client-js'
