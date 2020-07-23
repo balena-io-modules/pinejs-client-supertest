@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependencies
+      hash: 64ea7f44a362d41463027a3bc227e1d1df6946e8
+      body: |
+        Update pinejs-client-core form 6.0.1 to 6.1.0
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Pagan Gazzard
+      nested: []
+  version: 1.1.0
+  date: 2020-07-22T16:16:59.330Z
+- commits:
     - subject: Add a .versionbot/CHANGELOG.yml for nested changelogs
       hash: 9c501462319d5969ac1dbfa4d0dd955ee1559cce
       body: ''
