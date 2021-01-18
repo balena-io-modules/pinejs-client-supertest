@@ -33,6 +33,12 @@ type PromiseResult<T = any> = Promise<T> &
 			callback?: CallbackHandler,
 		): PromiseResult<T>;
 	};
+type Resolvable<R> = R | PromiseLike<R>;
+type ResolvableReturnType<T extends (...args: any[]) => any> = T extends (
+	...args: any[]
+) => Resolvable<infer R>
+	? R
+	: any;
 
 interface BackendParams {
 	app: express.Express;
@@ -66,38 +72,48 @@ export class PineTest extends PinejsClientCore<PineTest> {
 
 	public put(
 		...args: Parameters<PinejsClientCore<PineTest>['put']>
-	): PromiseResult<{}> {
-		return super.put(...args) as PromiseResult<{}>;
+	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['put']>> {
+		return super.put(...args) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<PineTest>['put']>
+		>;
 	}
 
 	public patch(
 		...args: Parameters<PinejsClientCore<PineTest>['patch']>
-	): PromiseResult<{}> {
-		return super.patch(...args) as PromiseResult<{}>;
+	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['patch']>> {
+		return super.patch(...args) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<PineTest>['patch']>
+		>;
 	}
 
 	public post(
 		...args: Parameters<PinejsClientCore<PineTest>['post']>
-	): PromiseResult<{}> {
-		return super.post(...args) as PromiseResult<{}>;
+	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['post']>> {
+		return super.post(...args) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<PineTest>['post']>
+		>;
 	}
 
 	public delete(
 		...args: Parameters<PinejsClientCore<PineTest>['delete']>
-	): PromiseResult<{}> {
-		return super.delete(...args) as PromiseResult<{}>;
+	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['delete']>> {
+		return super.delete(...args) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<PineTest>['delete']>
+		>;
 	}
 
 	public upsert(
 		...args: Parameters<PinejsClientCore<PineTest>['upsert']>
-	): PromiseResult<{} | undefined> {
-		return super.upsert(...args) as PromiseResult<{} | undefined>;
+	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['upsert']>> {
+		return super.upsert(...args) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<PineTest>['upsert']>
+		>;
 	}
 
 	public request(
 		...args: Parameters<PinejsClientCore<PineTest>['request']>
-	): PromiseResult<{}> {
-		return super.request(...args) as PromiseResult<{}>;
+	): PromiseResult<any> {
+		return super.request(...args) as PromiseResult<any>;
 	}
 
 	_request({
