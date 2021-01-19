@@ -1,4 +1,24 @@
 - commits:
+    - subject: Throw on not supported upsert & getOrCreate methods
+      hash: a7acf22c7fce88d14b3e5138ae5f377ee035a288
+      body: |
+        These were already not running as expected and
+        even after trying to re-implement them I didn't
+        manage to reach a non-hacky result in a sane
+        amount of time. On top of that, given that this
+        library is primarily targeting testing endpoints,
+        those two methods should be avoided since they
+        provide an abstraction on top of two other calls.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 1.3.1
+  date: 2021-01-19T13:17:39.248Z
+- commits:
     - subject: Update pinejs-client-core to 6.9.3 and pick up improved typings
       hash: 06b1ce8a5b42ec25e6f0dd67affd78501765d7c4
       body: |
