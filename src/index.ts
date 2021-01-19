@@ -102,12 +102,12 @@ export class PineTest extends PinejsClientCore<PineTest> {
 		>;
 	}
 
-	public upsert(
-		...args: Parameters<PinejsClientCore<PineTest>['upsert']>
-	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['upsert']>> {
-		return super.upsert(...args) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<PineTest>['upsert']>
-		>;
+	public upsert(): never {
+		throw new Error('upsert is not supported by pinejs-client-supertest');
+	}
+
+	public getOrCreate(): never {
+		throw new Error('getOrCreate is not supported by pinejs-client-supertest');
 	}
 
 	public request(
