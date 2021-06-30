@@ -1,4 +1,19 @@
 - commits:
+    - subject: Delete CODEOWNERS
+      hash: 67cbb664507a4e8426fe35b0acc3dd60780c2737
+      body: ''
+      footer:
+        See: >-
+          https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
+        see: >-
+          https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 1.3.2
+  date: 2021-06-30T15:42:03.852Z
+- commits:
     - subject: Throw on not supported upsert & getOrCreate methods
       hash: a7acf22c7fce88d14b3e5138ae5f377ee035a288
       body: |
