@@ -116,6 +116,16 @@ export class PineTest extends PinejsClientCore<PineTest> {
 		return super.request(...args) as PromiseResult<any>;
 	}
 
+	protected callWithRetry<T>(
+		fnCall: () => Promise<T>,
+		retry?: Params['retry'],
+	): Promise<T> {
+		if ((retry ?? this.retry) === false) {
+			return fnCall();
+		}
+		throw new Error('Cannot use retry with supertest');
+	}
+
 	_request({
 		method,
 		url,
