@@ -1,12 +1,90 @@
 - commits:
+    - subject: Fix using along with pinejs-client v6.10
+      hash: 766ab85c8f2ea0a6501a17df7584b3907dccc783
+      body: |
+        Update pinejs-client-core from 6.9.3 to 6.10.1
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested:
+        - commits:
+            - subject: Do not await the _request() result to allow enhanced promises
+                downstream
+              hash: a209138f928809869d68e05cdcea4c2bf0d1fac1
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+          version: pinejs-client-js-6.10.1
+          title: "'Avoid modifying the resulting promise when retries are not used'"
+          date: 2022-02-08T23:33:07.778Z
+        - commits:
+            - subject: Add optional retry logic to client
+              hash: d5496ebe73a0db28ac1c123575e80c9d25367d48
+              body: ""
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Paul Jonathan Zoulin
+          version: pinejs-client-js-6.10.0
+          date: 2022-01-24T19:05:04.020Z
+        - commits:
+            - subject: Reformat with the latest prettier
+              hash: 42108027c8c473b4d49e66054a7618d2a4211b79
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+            - subject: Delete CODEOWNERS
+              hash: bfe5e906b9e5d00c0efa7a380609552600d9328b
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                See: https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
+                see: https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
+              author: Thodoris Greasidis
+          version: pinejs-client-js-6.9.6
+          date: 2021-06-30T21:30:37.871Z
+        - commits:
+            - subject: Enable strict tsconfig options by default
+              hash: 8ad51e0af76b9e6c1676a0e4069d851f7b3c5211
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+          version: pinejs-client-js-6.9.5
+          date: 2021-03-22T14:28:40.467Z
+        - commits:
+            - subject: Update dependencies
+              hash: 764a29ab100601362e2018c8867be7e66ea10c71
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+          version: pinejs-client-js-6.9.4
+          date: 2021-03-10T20:28:20.915Z
+  version: 1.3.3
+  title: "'Fix using along with pinejs-client v6.10'"
+  date: 2022-02-08T23:43:56.560Z
+- commits:
     - subject: Delete CODEOWNERS
       hash: 67cbb664507a4e8426fe35b0acc3dd60780c2737
-      body: ''
+      body: ""
       footer:
-        See: >-
-          https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
-        see: >-
-          https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
+        See: https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
+        see: https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
         Change-type: patch
         change-type: patch
       author: Thodoris Greasidis
@@ -46,7 +124,7 @@
         - commits:
             - subject: Explicitly specify return types for all functions
               hash: d53b6cef4ba00527b889d49a6567b8964457025e
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -56,7 +134,7 @@
         - commits:
             - subject: Update dev dependencies
               hash: 0af301426da52e51d50789394b19d7af205fc735
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -66,7 +144,7 @@
         - commits:
             - subject: Improve typings
               hash: c8cd644f5e9d8eb43895086cd9ca453b9d651fd6
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -76,7 +154,7 @@
         - commits:
             - subject: Add 'getOrCreate' method supporting natural keys
               hash: 5aa39b34fef7c7a4bbb27c2c81bb1c8ee4ee2c94
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
@@ -88,7 +166,7 @@
         - commits:
             - subject: Add support for $format
               hash: aa85327cb7910c74b1bed5323f7ae708aeb2d2b9
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
@@ -96,9 +174,9 @@
           version: pinejs-client-js-6.8.0
           date: 2020-09-03T15:46:49.095Z
         - commits:
-            - subject: 'Improve $orderby typing to allow `[{a: ''desc''}, {b: ''asc''}]`'
+            - subject: "Improve $orderby typing to allow `[{a: 'desc'}, {b: 'asc'}]`"
               hash: 3f66006790c0ace813dd902125b22cf79f2a3095
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -108,7 +186,7 @@
         - commits:
             - subject: Update dev dependencies
               hash: c131ef723a228e19caf21bc92e9bf9456b7bc1e0
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -118,7 +196,7 @@
         - commits:
             - subject: Fix prepare $count typings
               hash: fe63b2ba648b0ef545afe9fd18d433faca4af6a2
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -128,7 +206,7 @@
         - commits:
             - subject: Improve typings for request/post/put/patch/delete
               hash: 32c0d5b40c14e44155391099a9051255c38b1c05
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
@@ -150,7 +228,7 @@
         - commits:
             - subject: Fix typing when id is specified to be `AnyObject | undefined`
               hash: c4802cb748b1552345f036120c3aa6254e6cc946
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -158,18 +236,16 @@
           version: pinejs-client-js-6.6.1
           date: 2020-08-11T17:10:09.498Z
         - commits:
-            - subject: 'Deprecate `$expand: { ''a/$count'': {...} }`'
+            - subject: "Deprecate `$expand: { 'a/$count': {...} }`"
               hash: 8be33ad064905476e3f21978b7e1d760f5e27f4e
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
               author: Pagan Gazzard
-            - subject: >-
-                Deprecate `resource: 'a/$count'` and update typings to reflect
-                it
+            - subject: "Deprecate `resource: 'a/$count'` and update typings to reflect it"
               hash: 779cc424cb6d2562aa9a98a3ff083b68308d9797
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
@@ -177,18 +253,16 @@
           version: pinejs-client-js-6.6.0
           date: 2020-08-11T16:18:59.088Z
         - commits:
-            - subject: 'Add `options: { $count: { ... } }` sugar for top level $count'
+            - subject: "Add `options: { $count: { ... } }` sugar for top level $count"
               hash: 13072f715da6c0ca3eab08584eaa48f39ea985b2
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
               author: Pagan Gazzard
-            - subject: >-
-                Add `$expand: { a: { $count: { ... } } }` sugar for $count in
-                expands
+            - subject: "Add `$expand: { a: { $count: { ... } } }` sugar for $count in expands"
               hash: b2afb397c09a31c9ab3c1c370846c1b8762db32d
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
@@ -198,7 +272,7 @@
         - commits:
             - subject: Improve return typing of `subscribe` method
               hash: 2311fe03b04f4e6149693a9e5c392f9f0bb2a549
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
@@ -208,30 +282,28 @@
         - commits:
             - subject: Fix Poll.on typings
               hash: 315697d9c2c0e59652bcceddb7f36cb498269f64
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
               author: Pagan Gazzard
             - subject: Improve return typing when id is passed to GET methods
               hash: 2d174f758314a20c01a171ac5826b71e4f623dcc
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
               author: Pagan Gazzard
-            - subject: >-
-                Remove `PromiseResult` type, use `Promise<PromiseResultTypes>`
-                instead
+            - subject: Remove `PromiseResult` type, use `Promise<PromiseResultTypes>` instead
               hash: 905f275731af6ce2560c37f41343052f05365cd1
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
               author: Pagan Gazzard
-            - subject: 'Remove `PromiseObj` type, use `Promise<{}>` instead'
+            - subject: Remove `PromiseObj` type, use `Promise<{}>` instead
               hash: 78aa2410aa86bf73cc4831f2149fc85e28a6ea23
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
@@ -239,9 +311,9 @@
           version: pinejs-client-js-6.3.0
           date: 2020-08-11T08:57:09.655Z
         - commits:
-            - subject: 'Add `$filter: { a: { $count: 1 } }` sugar for $count in filters'
+            - subject: "Add `$filter: { a: { $count: 1 } }` sugar for $count in filters"
               hash: f2fef3833f321bf81543c62a9a3db09d7fbc0a4a
-              body: ''
+              body: ""
               footer:
                 Change-type: minor
                 change-type: minor
@@ -251,7 +323,7 @@
         - commits:
             - subject: Remove redundant ParamsObj/SubscribeParamsObj types
               hash: f5fc6762aa8f1918424fb5e1c1a05435f07af285
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -261,16 +333,14 @@
         - commits:
             - subject: Make use of `mapObj` helper in more places
               hash: 2189f9918cb515071d2f6ecb941b0d838ee6c5ea
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
               author: Pagan Gazzard
-            - subject: >-
-                Use `Object.keys` in preference to `hasOwnProperty` where
-                applicable
+            - subject: Use `Object.keys` in preference to `hasOwnProperty` where applicable
               hash: 2ea0e9549974150ef9e7f82206f25000407e37ba
-              body: ''
+              body: ""
               footer:
                 Change-type: patch
                 change-type: patch
@@ -294,7 +364,7 @@
 - commits:
     - subject: Add a .versionbot/CHANGELOG.yml for nested changelogs
       hash: 9c501462319d5969ac1dbfa4d0dd955ee1559cce
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -303,34 +373,34 @@
   date: 2020-06-23T11:30:16.175Z
 - commits:
     - author: Thodoris Greasidis
-      body: ''
+      body: ""
       footers:
         change-type: minor
         signed-off-by: Thodoris Greasidis <thodoris@balena.io>
       hash: 9f7589f3287edcf6d73dba9ada6ee04e09c4b623
       subject: Add method overrides to provide supertest typings in the results
     - author: Thodoris Greasidis
-      body: ''
+      body: ""
       footers:
         change-type: major
       hash: 57db30389a6adb270ab63bbc4c9736b587ce0637
       subject: Update pinejs-client-core to v6
     - author: Thodoris Greasidis
-      body: ''
+      body: ""
       footers:
         change-type: major
         signed-off-by: Thodoris Greasidis <thodoris@balena.io>
       hash: ddc881c211c4e035e5e9848b94df92aa6c7e7242
       subject: Bump build target to es2018
-  date: '2020-06-22T11:29:45Z'
+  date: 2020-06-22T11:29:45Z
   version: 1.0.0
 - commits:
     - author: Thodoris Greasidis
-      body: ''
+      body: ""
       footers:
         change-type: minor
         signed-off-by: Thodoris Greasidis <thodoris@balena.io>
       hash: e4b735ab2b4ad9faa610bd74677b571a005ed09a
       subject: Initial code commit
-  date: '2020-04-29T12:24:07Z'
+  date: 2020-04-29T12:24:07Z
   version: 0.2.0
