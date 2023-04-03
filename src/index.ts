@@ -41,7 +41,7 @@ type ResolvableReturnType<T extends (...args: any[]) => any> = T extends (
 	: any;
 
 interface BackendParams {
-	app: express.Express;
+	app: express.Express | string;
 }
 
 /** A pine testing client fused with the api of supertest */
