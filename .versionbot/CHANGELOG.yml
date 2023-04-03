@@ -1,4 +1,16 @@
 - commits:
+    - subject: Allow passing a url string as the `app` instead of an Express app
+      hash: 2c1bbeb634388d6ee34f430c85b356a3072bf47c
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Thodoris Greasidis
+      nested: []
+  version: 1.4.0
+  title: ""
+  date: 2023-04-03T17:15:45.835Z
+- commits:
     - subject: Delete redundant .resinci.yml
       hash: 7339398a79f3d6d46f67d68d9666b43ebc5a1b50
       body: ""
