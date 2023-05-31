@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update flowzone.yml
+      hash: 0f2594b2a74d17ce2f790a8bc1b9f8d5fd14d284
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Kyle Harding
+      nested: []
+  version: 1.4.1
+  title: ""
+  date: 2023-05-31T15:40:40.903Z
+- commits:
     - subject: Allow passing a url string as the `app` instead of an Express app
       hash: 2c1bbeb634388d6ee34f430c85b356a3072bf47c
       body: ""
