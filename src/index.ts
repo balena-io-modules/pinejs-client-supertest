@@ -9,7 +9,7 @@ type supportedMethod = 'get' | 'put' | 'patch' | 'post' | 'delete';
 
 // Use `T = any` by default, just like supertest does, but also support specifying
 // the expected type, so that we can avoid the ugly `() as Something` castings.
-type PromiseResult<T = any> = Promise<T> &
+export type PromiseResult<T = any> = Promise<T> &
 	Omit<Test, 'expect' | 'then'> &
 	Promise<Overwrite<Response, { body: T }>> & {
 		// Atm we can't override just the return type of a method w/o re-defining all its variants.
