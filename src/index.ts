@@ -1,9 +1,47 @@
 import { PinejsClientCore, Params } from 'pinejs-client-core';
 import type * as express from 'express';
+import { STATUS_CODES } from 'http';
 import type { CallbackHandler, Response, Test } from 'supertest';
 import supertest from './supertest';
 import { expect } from './chai';
 import type { UserParam, Overwrite } from './common';
+
+// Copied over "as is" from supertest
+function _assertStatus(status: number, res: Response) {
+	if (res.status !== status) {
+		const a = STATUS_CODES[status];
+		const b = STATUS_CODES[res.status];
+		return new Error(
+			'expected ' + status + ' "' + a + '", got ' + res.status + ' "' + b + '"',
+		);
+	}
+}
+
+/**
+ * This enhances `.expect(statusCode, ...)` to also log the response body when
+ * the statusCode is different than expected, to make the original error more useful.
+ */
+function augmentStatusAssertionError<
+	T extends { expect: PromiseResult['expect'] },
+>(supertestResult: T): T {
+	const originalExpect = supertestResult.expect.bind(
+		supertestResult,
+	) as typeof supertestResult.expect;
+	supertestResult.expect = function (...args) {
+		const [expectedStatus] = args;
+		if (typeof expectedStatus === 'number') {
+			originalExpect((res) => {
+				const error = _assertStatus(expectedStatus, res);
+				if (error) {
+					error.message += `, with response body:\n${res.body}`;
+					throw error;
+				}
+			});
+		}
+		return originalExpect.apply(this, args);
+	};
+	return supertestResult;
+}
 
 type supportedMethod = 'get' | 'put' | 'patch' | 'post' | 'delete';
 
@@ -113,7 +151,9 @@ export class PineTest extends PinejsClientCore<PineTest> {
 	public request(
 		...args: Parameters<PinejsClientCore<PineTest>['request']>
 	): PromiseResult<any> {
-		return super.request(...args) as PromiseResult<any>;
+		return augmentStatusAssertionError(
+			super.request(...args) as PromiseResult<any>,
+		);
 	}
 
 	protected callWithRetry<T>(
