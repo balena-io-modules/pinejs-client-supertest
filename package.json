@@ -28,13 +28,13 @@
   },
   "scripts": {
     "build": "npm run lint && tsc",
-    "lint": "balena-lint --typescript src",
-    "lint-fix": "balena-lint --typescript --fix src",
+    "lint": "balena-lint src",
+    "lint-fix": "balena-lint --fix src",
     "test": "npm run build",
     "prepack": "npm run build"
   },
   "devDependencies": {
-    "@balena/lint": "^5.4.0",
+    "@balena/lint": "^7.2.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.3",
     "typescript": "^5.2.2"
