@@ -1,4 +1,40 @@
 - commits:
+    - subject: Update supertest to v6
+      hash: c1a50ffed88dd97603a9756845fed26a9c0d9b58
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Update @balena/lint to v7
+      hash: 9c284022c094b9003fed9a42c2603f3acc5d2612
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Update TypeScript to 5.2.2
+      hash: f1842ad071e5c4de546cb47c76243973784e203a
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Drop support for node < 16 & require es2021
+      hash: 1e7a61eb595e65a96307e20e168e83e180065603
+      body: ""
+      footer:
+        Change-type: major
+        change-type: major
+      author: Thodoris Greasidis
+      nested: []
+  version: 2.0.0
+  title: ""
+  date: 2023-10-10T12:09:26.682Z
+- commits:
     - subject: Export `PromiseResult`
       hash: eab27d77703503ed0e0402089a31ae6a6f509d51
       body: ""
