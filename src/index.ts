@@ -46,7 +46,10 @@ interface BackendParams {
 
 /** A pine testing client fused with the api of supertest */
 export class PineTest extends PinejsClientCore<PineTest> {
-	constructor(params: Params, public backendParams: BackendParams) {
+	constructor(
+		params: Params,
+		public backendParams: BackendParams,
+	) {
 		super(params);
 	}
 
