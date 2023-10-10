@@ -68,7 +68,14 @@ export class PineTest extends PinejsClientCore<PineTest> {
 			}
 
 			expect(() => {
-				response.body = this.transformGetResult(normalizedParams)(body);
+				const resultBody = this.transformGetResult(normalizedParams)(body);
+				// We need to use Object.defineProperty in order to be able to set undefined
+				// as the response body value, since superagent uses a getter which re-parses
+				// the body whenever it is undefined.
+				// See: https://github.com/ladjs/superagent/blob/1c8338b2e0a3b8f604d08acc7f3cbe305be1e571/src/node/response.js#L54
+				Object.defineProperty(response, 'body', {
+					value: resultBody,
+				});
 			}).to.not.throw();
 		}) as PromiseResult<T>;
 	}
