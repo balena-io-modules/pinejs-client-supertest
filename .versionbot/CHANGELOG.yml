@@ -1,4 +1,16 @@
 - commits:
+    - subject: "get(): Fix returning an empty object instead of undefined"
+      hash: c69bc3a3ecf7f542b58ce1d70240cfb9c02fda31
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 2.0.1
+  title: ""
+  date: 2023-10-10T12:55:50.006Z
+- commits:
     - subject: Update supertest to v6
       hash: c1a50ffed88dd97603a9756845fed26a9c0d9b58
       body: ""
