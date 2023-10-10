@@ -47,7 +47,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "pinejs-client-core": "^6.10.1",
-    "supertest": "^4.0.2"
+    "supertest": "^6.3.3"
   },
   "versionist": {
     "publishedAt": "2023-07-19T08:07:28.864Z"
