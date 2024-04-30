@@ -1,4 +1,5 @@
-import { PinejsClientCore, Params } from 'pinejs-client-core';
+import type { Params } from 'pinejs-client-core';
+import { PinejsClientCore } from 'pinejs-client-core';
 import type * as express from 'express';
 import type { CallbackHandler, Response, Test } from 'supertest';
 import supertest from './supertest';
