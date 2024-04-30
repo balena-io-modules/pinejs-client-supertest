@@ -1,4 +1,33 @@
 - commits:
+    - subject: Update @balena/lint to 8.0.2
+      hash: eeed5aea54705bdcb824f87292b0f05aa1903c03
+      body: |
+        Update @balena/lint from 7.2.0 to 8.0.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Update TypeScript to 5.4.5
+      hash: e880fcfc4cb45bdceb91122ee9a29464f4c078ec
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Update supertest to v7
+      hash: 09e5ac4697527b1af1a9819cd48277d7da5d7c99
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 2.0.3
+  title: ""
+  date: 2024-04-30T09:51:57.367Z
+- commits:
     - subject: Update @types/supertest to v6
       hash: 698ac4eb72b41b86f9c1644024f3e5df14eb44d6
       body: ""
