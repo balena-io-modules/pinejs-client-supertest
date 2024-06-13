@@ -1,4 +1,433 @@
 - commits:
+    - subject: Update dependencies
+      hash: acbb4cf2746cfb6fab12d1c62c7280aa127b6d52
+      body: |
+        Update pinejs-client-core from 6.10.1 to 6.14.13
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested:
+        - commits:
+            - subject: Deprecate passing `url` to helper functions
+              hash: 5ad1d4a417e2631d70acf7192b7132366a77be3b
+              body: >
+                The intention is that these are use as helpers functions to
+                build the
+
+                url from an object and so passing a `url` directly is not really
+                the
+
+                intent and interferes with improving the typings for the
+                intended case.
+
+                It is still possible to pass urls directly to the `request`
+                function if
+
+                it is essential but the true answer is to support building those
+                urls,
+
+                and using `prepare` if it is necessary
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.13
+          title: ""
+          date: 2024-06-12T13:09:45.863Z
+        - commits:
+            - subject: Type `upsert` and `getOrCreate` as not accepting a `url`
+              hash: f5261feec2d9fd45bb52885d0aed9482f743df5a
+              body: >
+                This is because they are not designed to support using a `url`
+                and are
+
+                likely to break in very weird and unexpected ways, and as such
+                removing
+
+                it from the typing should reduce potential for surprising errors
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.12
+          title: ""
+          date: 2024-06-12T11:12:46.444Z
+        - commits:
+            - subject: Include comments in generated output so that jsdoc is available
+              hash: 0a20be620a68b92ef95ce735eeebe3de0d754b7f
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.11
+          title: ""
+          date: 2024-06-11T15:00:11.283Z
+        - commits:
+            - subject: "Tests: improve typing of tests"
+              hash: d970b64c9400e11ee55c29f16fe489c45b16a957
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.10
+          title: ""
+          date: 2024-06-11T01:32:26.832Z
+        - commits:
+            - subject: Add `$filter` to nested `$count` typings
+              hash: 2774bd0e8b03d6d204df41c2d4ebf3a9d039057e
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.9
+          title: ""
+          date: 2024-06-10T15:33:59.941Z
+        - commits:
+            - subject: "Tests: remove unnecessary/unintended returns"
+              hash: b51e379e6a5b1c6cbc5cb83d6dcf537bc6776b05
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.8
+          title: ""
+          date: 2024-06-10T13:36:27.251Z
+        - commits:
+            - subject: Fix using top level $count downstream
+              hash: 03553a4d582ac8354bf2adc47fbe63fefb587042
+              body: >
+                It's unclear why this doesn't cause typing issues within
+
+                pinejs-client-core itself but it does fail when using it
+                downstream
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.7
+          title: ""
+          date: 2024-06-06T13:32:31.757Z
+        - commits:
+            - subject: Type $count/$any/$all as needing to be nested in a navigation property
+              hash: 278681eeed59a175159446ec9e036e9f66f879dc
+              body: |
+                eg `$filter: { references__resource: { $any: { ... } } }`
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.6
+          title: ""
+          date: 2024-05-28T17:39:25.074Z
+        - commits:
+            - subject: Use readonly arrays for typings for better compatibility with `as
+                const`
+              hash: aef91ea270e4110ef11a8ee76929acc7e8804b36
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.5
+          title: ""
+          date: 2024-05-28T15:11:57.306Z
+        - commits:
+            - subject: Deprecate the generic `PinejsClient` typing in favor of using `this`
+                for `.clone` typing
+              hash: 010c949c91a1765bec8050140fa35367a8279950
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.4
+          title: ""
+          date: 2024-05-08T01:05:08.480Z
+        - commits:
+            - subject: Update dev dependencies
+              hash: 4042a5be6e35d26f3db74309a5c3e5e3948cb75c
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.3
+          title: ""
+          date: 2024-04-17T15:47:43.685Z
+        - commits:
+            - subject: Improve typings
+              hash: 45240b18c41f7558bed64fb2e5689d58b7742f51
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.2
+          title: ""
+          date: 2024-03-04T16:18:00.230Z
+        - commits:
+            - subject: Update dependencies
+              hash: 4e982dab1dcd6d786e4224b695aa2801c283b9f7
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.14.1
+          title: ""
+          date: 2024-03-04T16:05:19.595Z
+        - commits:
+            - subject: Respect the Retry-After header when clients define the
+                getRetryAfterHeader option
+              hash: 04f146bbe2127f4bc140ce7c7e9d9d78f62e00dd
+              body: ""
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.14.0
+          title: ""
+          date: 2023-12-05T13:05:12.092Z
+        - commits:
+            - subject: Add support for $duration
+              hash: 05edeeea86147ac49dd864ae6e0b46ffc73f6fc4
+              body: ""
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.13.0
+          title: ""
+          date: 2023-07-11T13:16:05.245Z
+        - commits:
+            - subject: Avoid an unnecessary function creation on each get() call
+              hash: 782e43ef40a22fa4c8e0f3d64917b03e07c77522
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.12.4
+          title: ""
+          date: 2023-05-09T13:11:13.136Z
+        - commits:
+            - subject: "CI: Convert tests to TypeScript"
+              hash: 683efba924728fc57cbb9a43b7b65f124903661e
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Josh Bowling
+              nested: []
+          version: pinejs-client-js-6.12.3
+          title: ""
+          date: 2022-12-28T09:32:01.282Z
+        - commits:
+            - subject: "Fix `$orderby: { a: { $count: ... }, $dir: 'asc' }` typings"
+              hash: c62fb38c7cafa840aa799e112d96a7448e02a824
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.12.2
+          title: ""
+          date: 2022-11-18T10:22:54.685Z
+        - commits:
+            - subject: Update TypeScript to 4.9.3
+              hash: e41e987dd08a02f8805f345fa6c3e50c71f9d517
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.12.1
+          title: ""
+          date: 2022-11-15T22:41:19.258Z
+        - commits:
+            - subject: Deprecate the 'a/count' notation in $orderby
+              hash: f1aaa244418a413860cde2a42a0a3e44d00249d2
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+              nested: []
+            - subject: "Deprecate the $count: { $op: number } notation"
+              hash: 7501cc05ede27af86604ca0720f2ca5f99334f02
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+              nested: []
+            - subject: "Add support for `$filter: { $op: [{ $count: {} }, number] }` notation"
+              hash: 4a5c6ba07ce6e0e54bbea64c70be64c31e956080
+              body: ""
+              footer:
+                Change-type: minor
+                change-type: minor
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.12.0
+          title: ""
+          date: 2022-11-10T22:13:38.655Z
+        - commits:
+            - subject: "Deprecate non-$filter props inside `$expand: { a: { $count: {...}}}`"
+              hash: 97066f1d1359eb0d340a216fa9aec1ba81dc8052
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+              nested: []
+            - subject: "Add support for `$orderby: { a: { $count: ... }, $dir: 'asc' }`
+                notation"
+              hash: 570f0400e518efc0499a0111873768b5dc4c94f5
+              body: ""
+              footer:
+                Change-type: minor
+                change-type: minor
+                See: https://jel.ly.fish/thread-f02087f0-7415-42ac-9b54-75fd10fd0c5c
+                see: https://jel.ly.fish/thread-f02087f0-7415-42ac-9b54-75fd10fd0c5c
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.11.0
+          title: ""
+          date: 2022-11-09T15:59:01.304Z
+        - commits:
+            - subject: Refactor the deprecation message definitions
+              hash: 941b08a4359d11bef0d36645d2b4b358a3b1090e
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.10.7
+          title: ""
+          date: 2022-11-07T17:51:35.292Z
+        - commits:
+            - subject: "tests: Support `.only` & `.skip` in the higher level test functions"
+              hash: 9326a2d23d40831be6100241ae92fdec57404806
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.10.6
+          title: ""
+          date: 2022-10-31T13:32:10.558Z
+        - commits:
+            - subject: "Flowzone: Use inherited secrets"
+              hash: b3bf8b0cae0c40980f76a952d1890a228d48bd3c
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.10.5
+          title: ""
+          date: 2022-10-14T16:25:25.721Z
+        - commits:
+            - subject: Specify node 10 as the minimum supported node engine in the
+                package.json
+              hash: e0f8b12d1e7c0b792fcd16de9e938e90a368ba14
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+              nested: []
+            - subject: Replace balenaCI with flowzone
+              hash: 941af23d810b6924face6164ee601ee4b686bef7
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-6.10.4
+          title: ""
+          date: 2022-09-26T09:38:22.584Z
+        - commits:
+            - subject: Fix $count typings to only allow $filter under it
+              hash: d4cb65524ba2076df05f03574ce39acd547daa63
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+                See: https://docs.oasis-open.org/odata/odata/v4.01/os/abnf/odata-abnf-construction-rules.txt
+                see: https://docs.oasis-open.org/odata/odata/v4.01/os/abnf/odata-abnf-construction-rules.txt
+                Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+                signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+              author: Thodoris Greasidis
+          version: pinejs-client-js-6.10.3
+          title: "'Fix  typings to only allow  under it'"
+          date: 2022-09-15T15:20:32.755Z
+        - commits:
+            - subject: Update dependencies
+              hash: edc7575ac0976037506deb076d034e7cf08ce5bb
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+            - subject: Remove circleci
+              hash: 59c5a36292a80149b305d83a4d22b4d2dbe3001d
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+          version: pinejs-client-js-6.10.2
+          title: "'Remove circleci/update deps'"
+          date: 2022-04-08T13:22:23.848Z
+  version: 2.0.4
+  title: ""
+  date: 2024-06-13T13:25:00.953Z
+- commits:
     - subject: Update @balena/lint to 8.0.2
       hash: eeed5aea54705bdcb824f87292b0f05aa1903c03
       body: |
