@@ -45,8 +45,10 @@ interface BackendParams {
 	app: express.Express | string;
 }
 
+type Super = PinejsClientCore<unknown>;
+
 /** A pine testing client fused with the api of supertest */
-export class PineTest extends PinejsClientCore<PineTest> {
+export class PineTest extends PinejsClientCore<unknown> {
 	constructor(
 		params: Params,
 		public backendParams: BackendParams,
@@ -82,35 +84,71 @@ export class PineTest extends PinejsClientCore<PineTest> {
 	}
 
 	public put(
-		...args: Parameters<PinejsClientCore<PineTest>['put']>
-	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['put']>> {
-		return super.put(...args) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<PineTest>['put']>
+		params: { resource: NonNullable<Params['resource']> } & Params,
+	): PromiseResult<ResolvableReturnType<Super['put']>>;
+	/**
+	 * @deprecated PUTing via `url` is deprecated
+	 */
+	public put(
+		params: { resource?: undefined; url: NonNullable<Params['url']> } & Params,
+	): PromiseResult<ResolvableReturnType<Super['put']>>;
+	public put(
+		params: Params,
+	): PromiseResult<ResolvableReturnType<Super['put']>> {
+		return super.put(params as Parameters<Super['put']>[0]) as PromiseResult<
+			ResolvableReturnType<Super['put']>
 		>;
 	}
 
 	public patch(
-		...args: Parameters<PinejsClientCore<PineTest>['patch']>
-	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['patch']>> {
-		return super.patch(...args) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<PineTest>['patch']>
-		>;
+		params: { resource: NonNullable<Params['resource']> } & Params,
+	): PromiseResult<ResolvableReturnType<Super['patch']>>;
+	/**
+	 * @deprecated PATCHing via `url` is deprecated
+	 */
+	public patch(
+		params: { resource?: undefined; url: NonNullable<Params['url']> } & Params,
+	): PromiseResult<ResolvableReturnType<Super['patch']>>;
+	public patch(
+		params: Params,
+	): PromiseResult<ResolvableReturnType<Super['patch']>> {
+		return super.patch(
+			params as Parameters<Super['patch']>[0],
+		) as PromiseResult<ResolvableReturnType<Super['patch']>>;
 	}
 
 	public post(
-		...args: Parameters<PinejsClientCore<PineTest>['post']>
-	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['post']>> {
-		return super.post(...args) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<PineTest>['post']>
+		params: { resource: NonNullable<Params['resource']> } & Params,
+	): PromiseResult<ResolvableReturnType<Super['post']>>;
+	/**
+	 * @deprecated POSTing via `url` is deprecated
+	 */
+	public post(
+		params: { resource?: undefined; url: NonNullable<Params['url']> } & Params,
+	): PromiseResult<ResolvableReturnType<Super['post']>>;
+	public post(
+		params: Params,
+	): PromiseResult<ResolvableReturnType<Super['post']>> {
+		return super.post(params as Parameters<Super['post']>[0]) as PromiseResult<
+			ResolvableReturnType<Super['post']>
 		>;
 	}
 
 	public delete(
-		...args: Parameters<PinejsClientCore<PineTest>['delete']>
-	): PromiseResult<ResolvableReturnType<PinejsClientCore<PineTest>['delete']>> {
-		return super.delete(...args) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<PineTest>['delete']>
-		>;
+		params: { resource: NonNullable<Params['resource']> } & Params,
+	): PromiseResult<ResolvableReturnType<Super['delete']>>;
+	/**
+	 * @deprecated DELETEing via `url` is deprecated
+	 */
+	public delete(
+		params: { resource?: undefined; url: NonNullable<Params['url']> } & Params,
+	): PromiseResult<ResolvableReturnType<Super['delete']>>;
+	public delete(
+		params: Params,
+	): PromiseResult<ResolvableReturnType<Super['delete']>> {
+		return super.delete(
+			params as Parameters<Super['delete']>[0],
+		) as PromiseResult<ResolvableReturnType<Super['delete']>>;
 	}
 
 	public upsert(): never {
@@ -121,9 +159,7 @@ export class PineTest extends PinejsClientCore<PineTest> {
 		throw new Error('getOrCreate is not supported by pinejs-client-supertest');
 	}
 
-	public request(
-		...args: Parameters<PinejsClientCore<PineTest>['request']>
-	): PromiseResult<any> {
+	public request(...args: Parameters<Super['request']>): PromiseResult<any> {
 		return super.request(...args) as PromiseResult<any>;
 	}
 

@@ -31,22 +31,23 @@
     "lint": "balena-lint src",
     "lint-fix": "balena-lint --fix src",
     "test": "npm run build",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "prepare": "node -e \"try { (await import('husky')).default() } catch (e) { if (e.code !== 'ERR_MODULE_NOT_FOUND') throw e }\" --input-type module"
   },
   "devDependencies": {
     "@balena/lint": "^8.0.2",
-    "husky": "^4.3.8",
-    "lint-staged": "^10.5.3",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.6",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@types/chai": "^4.2.14",
-    "@types/chai-as-promised": "^7.1.3",
-    "@types/express": "^4.17.11",
+    "@types/chai": "^4.3.16",
+    "@types/chai-as-promised": "^7.1.8",
+    "@types/express": "^4.17.21",
     "@types/supertest": "^6.0.2",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "pinejs-client-core": "^6.10.1",
+    "chai": "^4.4.1",
+    "chai-as-promised": "^7.1.2",
+    "pinejs-client-core": "^6.14.13",
     "supertest": "^7.0.0"
   },
   "versionist": {
