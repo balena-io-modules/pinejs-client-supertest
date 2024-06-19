@@ -1,10 +1,37 @@
-import type { Params } from 'pinejs-client-core';
+import type {
+	AnyObject,
+	AnyResource,
+	ConstructorParams,
+	ODataOptions,
+	Params,
+	PromiseResultTypes,
+	Resource,
+	RetryParameters,
+} from 'pinejs-client-core';
 import { PinejsClientCore } from 'pinejs-client-core';
 import type * as express from 'express';
 import type { CallbackHandler, Response, Test } from 'supertest';
 import supertest from './supertest';
 import { expect } from './chai';
 import type { UserParam, Overwrite } from './common';
+import type {
+	PickDeferred,
+	PickExpanded,
+} from '@balena/abstract-sql-to-typescript';
+
+type StringKeyOf<T> = keyof T & string;
+type SelectPropsOf<T extends Resource['Read'], U extends ODataOptions<T>> =
+	U['$select'] extends ReadonlyArray<StringKeyOf<T>>
+		? U['$select'][number]
+		: U['$select'] extends StringKeyOf<T>
+			? U['$select']
+			: never;
+type ExpandPropsOf<T extends Resource['Read'], U extends ODataOptions<T>> =
+	U['$expand'] extends ReadonlyArray<StringKeyOf<T>>
+		? U['$expand'][number]
+		: U['$expand'] extends { [key in StringKeyOf<T>]?: any }
+			? StringKeyOf<U['$expand']>
+			: never;
 
 type supportedMethod = 'get' | 'put' | 'patch' | 'post' | 'delete';
 
@@ -45,17 +72,140 @@ interface BackendParams {
 	app: express.Express | string;
 }
 
-type Super = PinejsClientCore<unknown>;
-
 /** A pine testing client fused with the api of supertest */
-export class PineTest extends PinejsClientCore<unknown> {
+export class PineTest<
+	Model extends {
+		[key in keyof Model]: Resource;
+	} = {
+		[key in string]: AnyResource;
+	},
+> extends PinejsClientCore<unknown, Model> {
 	constructor(
-		params: Params,
+		params: ConstructorParams,
 		public backendParams: BackendParams,
 	) {
 		super(params);
 	}
 
+	public get<
+		TResource extends StringKeyOf<Model>,
+		TParams extends Params<Model[TResource]> & {
+			options: {
+				$count: NonNullable<ODataOptions<Model[TResource]['Read']>['$count']>;
+			};
+		},
+	>(
+		params: {
+			resource: TResource;
+		} & TParams,
+	): PromiseResult<number>;
+	public get<
+		TResource extends StringKeyOf<Model>,
+		TParams extends Params<Model[TResource]> & {
+			id: NonNullable<Params<Model[TResource]>['id']>;
+			options: NonNullable<
+				Params<Model[TResource]>['options'] &
+					(
+						| {
+								$select: NonNullable<
+									NonNullable<Params<Model[TResource]>['options']>['$select']
+								>;
+						  }
+						| {
+								$expand: NonNullable<
+									NonNullable<Params<Model[TResource]>['options']>['$expand']
+								>;
+						  }
+					)
+			>;
+		},
+	>(
+		params: {
+			resource: TResource;
+		} & TParams,
+	): PromiseResult<
+		| NoInfer<
+				PickDeferred<
+					Model[TResource]['Read'],
+					SelectPropsOf<
+						Model[TResource]['Read'],
+						NonNullable<TParams['options']>
+					>
+				> &
+					PickExpanded<
+						Model[TResource]['Read'],
+						ExpandPropsOf<
+							Model[TResource]['Read'],
+							NonNullable<TParams['options']>
+						>
+					>
+		  >
+		| undefined
+	>;
+	public get<
+		TResource extends StringKeyOf<Model>,
+		TParams extends Params<Model[TResource]> & {
+			id: NonNullable<Params<Model[TResource]>['id']>;
+			resource: TResource;
+		},
+	>(
+		params: { resource: TResource } & TParams,
+	): PromiseResult<NoInfer<Model[TResource]['Read']> | undefined>;
+	public get<
+		TResource extends StringKeyOf<Model>,
+		TParams extends Omit<Params<Model[TResource]>, 'id'> & {
+			resource: TResource;
+			options: NonNullable<
+				Params<Model[TResource]>['options'] &
+					(
+						| {
+								$select: NonNullable<
+									NonNullable<Params<Model[TResource]>['options']>['$select']
+								>;
+						  }
+						| {
+								$expand: NonNullable<
+									NonNullable<Params<Model[TResource]>['options']>['$expand']
+								>;
+						  }
+					)
+			>;
+		},
+	>(
+		params: { resource: TResource } & TParams,
+	): PromiseResult<
+		NoInfer<
+			Array<
+				PickDeferred<
+					Model[TResource]['Read'],
+					SelectPropsOf<
+						Model[TResource]['Read'],
+						NonNullable<TParams['options']>
+					>
+				> &
+					PickExpanded<
+						Model[TResource]['Read'],
+						ExpandPropsOf<
+							Model[TResource]['Read'],
+							NonNullable<TParams['options']>
+						>
+					>
+			>
+		>
+	>;
+	public get<TResource extends StringKeyOf<Model>>(
+		params: { resource: TResource } & Omit<Params<Model[TResource]>, 'id'>,
+	): PromiseResult<NoInfer<Array<Model[TResource]['Read']>>>;
+	/**
+	 * @deprecated GETing via `url` is deprecated
+	 */
+	public get<T extends Resource = AnyResource>(
+		params: {
+			resource?: undefined;
+			url: NonNullable<Params<T>['url']>;
+		} & Params<T>,
+	): PromiseResult<PromiseResultTypes>;
+	public get<T = any>(params: Params): PromiseResult<T>;
 	public get<T = any>(params: Params): PromiseResult<T> {
 		// Use a different const, since if we just re-assign `params`
 		// inside the `expect(() => {})` TS forgets that it's ensured
@@ -83,72 +233,84 @@ export class PineTest extends PinejsClientCore<unknown> {
 		}) as PromiseResult<T>;
 	}
 
-	public put(
-		params: { resource: NonNullable<Params['resource']> } & Params,
-	): PromiseResult<ResolvableReturnType<Super['put']>>;
+	public put<TResource extends StringKeyOf<Model>>(
+		params: { resource: TResource; url?: undefined } & Params<Model[TResource]>,
+	): PromiseResult<void>;
 	/**
 	 * @deprecated PUTing via `url` is deprecated
 	 */
-	public put(
-		params: { resource?: undefined; url: NonNullable<Params['url']> } & Params,
-	): PromiseResult<ResolvableReturnType<Super['put']>>;
-	public put(
-		params: Params,
-	): PromiseResult<ResolvableReturnType<Super['put']>> {
-		return super.put(params as Parameters<Super['put']>[0]) as PromiseResult<
-			ResolvableReturnType<Super['put']>
+	public put<T extends Resource = AnyResource>(
+		params: {
+			resource?: undefined;
+			url: NonNullable<Params<T>['url']>;
+		} & Params<T>,
+	): PromiseResult<void>;
+	public put(params: Params<AnyResource>): PromiseResult<void> {
+		return super.put(
+			params as Parameters<PinejsClientCore<unknown, Model>['put']>[0],
+		) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<unknown, Model>['put']>
 		>;
 	}
 
-	public patch(
-		params: { resource: NonNullable<Params['resource']> } & Params,
-	): PromiseResult<ResolvableReturnType<Super['patch']>>;
+	public patch<TResource extends StringKeyOf<Model>>(
+		params: { resource: TResource; url?: undefined } & Params<Model[TResource]>,
+	): PromiseResult<void>;
 	/**
 	 * @deprecated PATCHing via `url` is deprecated
 	 */
-	public patch(
-		params: { resource?: undefined; url: NonNullable<Params['url']> } & Params,
-	): PromiseResult<ResolvableReturnType<Super['patch']>>;
-	public patch(
-		params: Params,
-	): PromiseResult<ResolvableReturnType<Super['patch']>> {
+	public patch<T extends Resource = AnyResource>(
+		params: {
+			resource?: undefined;
+			url: NonNullable<Params<T>['url']>;
+		} & Params<T>,
+	): PromiseResult<void>;
+	public patch(params: Params<AnyResource>): PromiseResult<void> {
 		return super.patch(
-			params as Parameters<Super['patch']>[0],
-		) as PromiseResult<ResolvableReturnType<Super['patch']>>;
-	}
-
-	public post(
-		params: { resource: NonNullable<Params['resource']> } & Params,
-	): PromiseResult<ResolvableReturnType<Super['post']>>;
-	/**
-	 * @deprecated POSTing via `url` is deprecated
-	 */
-	public post(
-		params: { resource?: undefined; url: NonNullable<Params['url']> } & Params,
-	): PromiseResult<ResolvableReturnType<Super['post']>>;
-	public post(
-		params: Params,
-	): PromiseResult<ResolvableReturnType<Super['post']>> {
-		return super.post(params as Parameters<Super['post']>[0]) as PromiseResult<
-			ResolvableReturnType<Super['post']>
+			params as Parameters<PinejsClientCore<unknown, Model>['patch']>[0],
+		) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<unknown, Model>['patch']>
 		>;
 	}
 
-	public delete(
-		params: { resource: NonNullable<Params['resource']> } & Params,
-	): PromiseResult<ResolvableReturnType<Super['delete']>>;
+	public post<TResource extends StringKeyOf<Model>>(
+		params: { resource: TResource } & Params<Model[TResource]>,
+	): PromiseResult<PickDeferred<Model[TResource]['Read']>>;
+	/**
+	 * @deprecated POSTing via `url` is deprecated
+	 */
+	public post<T extends Resource = AnyResource>(
+		params: {
+			resource?: undefined;
+			url: NonNullable<Params<T>['url']>;
+		} & Params<T>,
+	): PromiseResult<AnyObject>;
+	public post(params: Params<AnyResource>): PromiseResult<AnyObject> {
+		return super.post(
+			params as Parameters<PinejsClientCore<unknown, Model>['post']>[0],
+		) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<unknown, Model>['post']>
+		>;
+	}
+
+	public delete<TResource extends StringKeyOf<Model>>(
+		params: { resource: TResource } & Params<Model[TResource]>,
+	): PromiseResult<void>;
 	/**
 	 * @deprecated DELETEing via `url` is deprecated
 	 */
-	public delete(
-		params: { resource?: undefined; url: NonNullable<Params['url']> } & Params,
-	): PromiseResult<ResolvableReturnType<Super['delete']>>;
-	public delete(
-		params: Params,
-	): PromiseResult<ResolvableReturnType<Super['delete']>> {
+	public delete<T extends Resource = AnyResource>(
+		params: {
+			resource?: undefined;
+			url: NonNullable<Params<T>['url']>;
+		} & Params<T>,
+	): PromiseResult<void>;
+	public delete(params: Params<AnyResource>): PromiseResult<void> {
 		return super.delete(
-			params as Parameters<Super['delete']>[0],
-		) as PromiseResult<ResolvableReturnType<Super['delete']>>;
+			params as Parameters<PinejsClientCore<unknown, Model>['delete']>[0],
+		) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<unknown, Model>['delete']>
+		>;
 	}
 
 	public upsert(): never {
@@ -159,13 +321,15 @@ export class PineTest extends PinejsClientCore<unknown> {
 		throw new Error('getOrCreate is not supported by pinejs-client-supertest');
 	}
 
-	public request(...args: Parameters<Super['request']>): PromiseResult<any> {
+	public request(
+		...args: Parameters<PinejsClientCore<unknown, Model>['request']>
+	): PromiseResult<any> {
 		return super.request(...args) as PromiseResult<any>;
 	}
 
 	protected callWithRetry<T>(
 		fnCall: () => Promise<T>,
-		retry?: Params['retry'],
+		retry?: RetryParameters,
 	): Promise<T> {
 		if ((retry ?? this.retry) === false) {
 			return fnCall();
@@ -181,7 +345,7 @@ export class PineTest extends PinejsClientCore<unknown> {
 	}: {
 		method: supportedMethod;
 		url: string;
-		body: Params['body'];
+		body: AnyObject;
 		user?: UserParam;
 	}) {
 		const { app } = this.backendParams;
