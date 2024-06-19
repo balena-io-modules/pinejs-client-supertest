@@ -1,4 +1,82 @@
 - commits:
+    - subject: Update pinejs-client-core to add support for using model specific typings
+      hash: f4679c3d41e3d7e9773638f5ee3943448bc09071
+      body: |
+        Update pinejs-client-core from 6.14.13 to 6.15.2
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Pagan Gazzard
+      nested:
+        - commits:
+            - subject: Improve $orderby typings when not providing a model
+              hash: 00c8ea6b5281f4d928d73cbe4427239a4ab3e6d8
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.2
+          title: ""
+          date: 2024-06-19T11:41:35.544Z
+        - commits:
+            - subject: Correctly type the `POST` result as being fully deferred
+              hash: 1055a00e740dd2cbf3e418408bed6c5f89b8db0f
+              body: >
+                Previously it did not state so the expanded versions were
+                available in
+
+                the typings even though the result would never actually include
+                them
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.1
+          title: ""
+          date: 2024-06-17T16:15:56.769Z
+        - commits:
+            - subject: Add support for using model specific typings
+              hash: 1077e19ef18cc4cede4d6401496a016fef459150
+              body: >
+                This requires passing the model typings when creating the
+                pinejs-client
+
+                instance and will mean that any usage after that will be type
+                checked
+
+                to limit to resources/properties that exist on the model. This
+                covers
+
+                almost all usage but there are some cases we cannot cover as we
+                would
+
+                need typescript support for partial inference of generics, eg
+                for
+
+                lambdas, or to make major changes to the querying interface.
+
+                This work should also be fully backwards compatible such that if
+                you do
+
+                not provide model typings then all typings should continue to
+                work as
+
+                previously
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.0
+          title: ""
+          date: 2024-06-14T10:45:40.382Z
+  version: 2.1.0
+  title: ""
+  date: 2024-06-19T13:37:12.416Z
+- commits:
     - subject: Update dependencies
       hash: acbb4cf2746cfb6fab12d1c62c7280aa127b6d52
       body: |
