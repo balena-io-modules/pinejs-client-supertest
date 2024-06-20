@@ -1,4 +1,16 @@
 - commits:
+    - subject: Correctly type that all properties are selected with a missing $select
+      hash: ae2bdc0c7250832063f852e30987214753577152
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 2.1.1
+  title: ""
+  date: 2024-06-20T10:36:12.022Z
+- commits:
     - subject: Update pinejs-client-core to add support for using model specific typings
       hash: f4679c3d41e3d7e9773638f5ee3943448bc09071
       body: |
