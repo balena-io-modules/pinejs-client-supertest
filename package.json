@@ -35,20 +35,20 @@
     "prepare": "node -e \"try { (await import('husky')).default() } catch (e) { if (e.code !== 'ERR_MODULE_NOT_FOUND') throw e }\" --input-type module"
   },
   "devDependencies": {
-    "@balena/lint": "^8.0.2",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "typescript": "^5.4.5"
+    "@balena/lint": "^8.2.7",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.9",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@balena/abstract-sql-to-typescript": "^3.2.1",
-    "@types/chai": "^4.3.16",
+    "@balena/abstract-sql-to-typescript": "^3.1.2",
+    "@types/chai": "^4.3.19",
     "@types/chai-as-promised": "^7.1.8",
     "@types/express": "^4.17.21",
     "@types/supertest": "^6.0.2",
-    "chai": "^4.4.1",
+    "chai": "^4.5.0",
     "chai-as-promised": "^7.1.2",
-    "pinejs-client-core": "^6.15.2",
+    "pinejs-client-core": "^6.15.11",
     "supertest": "^7.0.0"
   },
   "versionist": {
