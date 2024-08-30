@@ -1,4 +1,126 @@
 - commits:
+    - subject: Update dependencies
+      hash: 93c9b2ce1eabdf566d3d290dda8fc5a55f646416
+      body: |
+        Update pinejs-client-core from 6.15.2 to 6.15.11
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested:
+        - commits:
+            - subject: Fix most lint warnings
+              hash: 9562c9df8f231877d06b46ca673fbaeb7e144d2b
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.11
+          title: ""
+          date: 2024-08-12T22:37:35.394Z
+        - commits:
+            - subject: Fix `getOrCreate` and `upsert` typing for the `body` property
+              hash: a1ce21a7c55c04f55f3b8025d19076a49541a205
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.10
+          title: ""
+          date: 2024-07-08T16:05:56.800Z
+        - commits:
+            - subject: Export `ExpandableStringKeyOf` typing
+              hash: 17f1424d31069a882bb288cf418a01e83b60e806
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.9
+          title: ""
+          date: 2024-07-05T16:24:57.847Z
+        - commits:
+            - subject: Improve typings of `prepare` when used to `GET`
+              hash: 06f3fbecc514367900f07f83dbd61796e870abcf
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.8
+          title: ""
+          date: 2024-07-05T15:42:56.455Z
+        - commits:
+            - subject: Use `OptionsToResponse` to avoid most of the `get` overloads
+              hash: 7562b1aeb69a3ce97362ed0799b4c211948acc7e
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.7
+          title: ""
+          date: 2024-06-27T17:04:08.151Z
+        - commits:
+            - subject: Add support for nested $expand response types and $count expands
+              hash: 8b00172db2e150f8813d2080d0f19b5a2c2c3066
+              body: |
+                Update @balena/abstract-sql-to-typescript from 3.2.1 to 3.2.3
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.6
+          title: ""
+          date: 2024-06-25T13:53:50.690Z
+        - commits:
+            - subject: Select all non-expanded fields when there is no $select
+              hash: 7abf51ecd4aea620cd9d616d5ec1843c1c4ba5df
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.5
+          title: ""
+          date: 2024-06-25T11:09:05.055Z
+        - commits:
+            - subject: Update dependencies
+              hash: 18d9758ffb6cf0ce16f3870aa64ffe40c6d3ce5d
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.4
+          title: ""
+          date: 2024-06-24T20:52:38.559Z
+        - commits:
+            - subject: Correctly type that all properties are selected with a missing $select
+              hash: 935e630afd429790fa133cdbf7e2012ac491b969
+              body: ""
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-client-js-6.15.3
+          title: ""
+          date: 2024-06-20T10:36:12.898Z
+  version: 2.1.2
+  title: ""
+  date: 2024-08-30T17:54:10.456Z
+- commits:
     - subject: Correctly type that all properties are selected with a missing $select
       hash: ae2bdc0c7250832063f852e30987214753577152
       body: ""
