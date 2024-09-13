@@ -48,7 +48,7 @@
     "@types/supertest": "^6.0.2",
     "chai": "^4.5.0",
     "chai-as-promised": "^7.1.2",
-    "pinejs-client-core": "^6.15.11",
+    "pinejs-client-core": "^8.0.1",
     "supertest": "^7.0.0"
   },
   "versionist": {
