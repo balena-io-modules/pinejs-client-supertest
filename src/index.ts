@@ -14,26 +14,84 @@ import type { CallbackHandler, Response, Test } from 'supertest';
 import supertest from './supertest';
 import { expect } from './chai';
 import type { UserParam, Overwrite } from './common';
-import type {
-	PickDeferred,
-	PickExpanded,
-} from '@balena/abstract-sql-to-typescript';
+import type { PickDeferred } from '@balena/abstract-sql-to-typescript';
 
+type Expanded<T> = Extract<T, Array<Resource['Read']>>;
 type StringKeyOf<T> = keyof T & string;
 type SelectPropsOf<T extends Resource['Read'], U extends ODataOptions<T>> =
 	U['$select'] extends ReadonlyArray<StringKeyOf<T>>
 		? U['$select'][number]
 		: U['$select'] extends StringKeyOf<T>
 			? U['$select']
-			: // If no $select is provided, all properties are selected
-				StringKeyOf<T>;
-type ExpandPropsOf<T extends Resource['Read'], U extends ODataOptions<T>> =
-	U['$expand'] extends ReadonlyArray<StringKeyOf<T>>
+			: // If no $select is provided, all properties that are not $expanded are selected
+				Exclude<StringKeyOf<T>, ExpandPropsOf<T, U>>;
+type ExpandPropsOf<
+	T extends Resource['Read'],
+	U extends ODataOptions<T>,
+> = U['$expand'] extends { [key in StringKeyOf<T>]?: any }
+	? StringKeyOf<U['$expand']>
+	: U['$expand'] extends ReadonlyArray<StringKeyOf<T>>
 		? U['$expand'][number]
-		: U['$expand'] extends { [key in StringKeyOf<T>]?: any }
-			? StringKeyOf<U['$expand']>
-			: // If no $expand is provided, no properties are expanded
-				never;
+		: // If no $expand is provided, no properties are expanded
+			never;
+type ExpandToResponse<
+	T extends Resource['Read'],
+	U extends ODataOptions<T>,
+> = U['$expand'] extends { [key in StringKeyOf<T>]?: any }
+	? {
+			[P in keyof U['$expand']]-?: OptionsToResponse<
+				Expanded<T[P & string]>[number],
+				U['$expand'][P],
+				undefined
+			>;
+		}
+	: U['$expand'] extends ReadonlyArray<StringKeyOf<T>>
+		? {
+				[P in U['$expand'][number]]-?: Array<
+					PickDeferred<Expanded<T[P]>[number]>
+				>;
+			}
+		: // If no $expand is provided, no properties are expanded
+			// eslint-disable-next-line @typescript-eslint/ban-types -- We do want an empty object but `Record<string, never>` doesn't work because things breaks after it's used in a union, needs investigation
+			{};
+
+// Check if two types are exactly equal, useful for checking against eg exactly `any`
+type Equals<X, Y> =
+	(<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
+		? true
+		: false;
+
+type BaseResourceId =
+	| string
+	| number
+	| Date
+	| {
+			'@': string;
+	  };
+type ResourceAlternateKey<T extends Resource['Read']> = {
+	[key in StringKeyOf<T>]?: BaseResourceId;
+};
+type ResourceId<T extends Resource['Read']> =
+	| BaseResourceId
+	| ResourceAlternateKey<T>;
+
+export type OptionsToResponse<
+	T extends Resource['Read'],
+	U extends ODataOptions<T>,
+	ID extends ResourceId<T> | undefined,
+> = U extends {
+	$count: ODataOptions<T>['$count'];
+}
+	? number
+	: Equals<ID, any> extends true
+		?
+				| (PickDeferred<T, SelectPropsOf<T, U>> & ExpandToResponse<T, U>)
+				| undefined
+		: ID extends ResourceId<T>
+			?
+					| (PickDeferred<T, SelectPropsOf<T, U>> & ExpandToResponse<T, U>)
+					| undefined
+			: Array<PickDeferred<T, SelectPropsOf<T, U>> & ExpandToResponse<T, U>>;
 
 type supportedMethod = 'get' | 'put' | 'patch' | 'post' | 'delete';
 
@@ -92,112 +150,19 @@ export class PineTest<
 	public get<
 		TResource extends StringKeyOf<Model>,
 		TParams extends Params<Model[TResource]> & {
-			options: {
-				$count: NonNullable<ODataOptions<Model[TResource]['Read']>['$count']>;
-			};
-		},
-	>(
-		params: {
 			resource: TResource;
-		} & TParams,
-	): PromiseResult<number>;
-	public get<
-		TResource extends StringKeyOf<Model>,
-		TParams extends Params<Model[TResource]> & {
-			id: NonNullable<Params<Model[TResource]>['id']>;
-			options: NonNullable<
-				Params<Model[TResource]>['options'] &
-					(
-						| {
-								$select: NonNullable<
-									NonNullable<Params<Model[TResource]>['options']>['$select']
-								>;
-						  }
-						| {
-								$expand: NonNullable<
-									NonNullable<Params<Model[TResource]>['options']>['$expand']
-								>;
-						  }
-					)
-			>;
-		},
-	>(
-		params: {
-			resource: TResource;
-		} & TParams,
-	): PromiseResult<
-		| NoInfer<
-				PickDeferred<
-					Model[TResource]['Read'],
-					SelectPropsOf<
-						Model[TResource]['Read'],
-						NonNullable<TParams['options']>
-					>
-				> &
-					PickExpanded<
-						Model[TResource]['Read'],
-						ExpandPropsOf<
-							Model[TResource]['Read'],
-							NonNullable<TParams['options']>
-						>
-					>
-		  >
-		| undefined
-	>;
-	public get<
-		TResource extends StringKeyOf<Model>,
-		TParams extends Params<Model[TResource]> & {
-			id: NonNullable<Params<Model[TResource]>['id']>;
-			resource: TResource;
-		},
-	>(
-		params: { resource: TResource } & TParams,
-	): PromiseResult<NoInfer<Model[TResource]['Read']> | undefined>;
-	public get<
-		TResource extends StringKeyOf<Model>,
-		TParams extends Omit<Params<Model[TResource]>, 'id'> & {
-			resource: TResource;
-			options: NonNullable<
-				Params<Model[TResource]>['options'] &
-					(
-						| {
-								$select: NonNullable<
-									NonNullable<Params<Model[TResource]>['options']>['$select']
-								>;
-						  }
-						| {
-								$expand: NonNullable<
-									NonNullable<Params<Model[TResource]>['options']>['$expand']
-								>;
-						  }
-					)
-			>;
 		},
 	>(
 		params: { resource: TResource } & TParams,
 	): PromiseResult<
 		NoInfer<
-			Array<
-				PickDeferred<
-					Model[TResource]['Read'],
-					SelectPropsOf<
-						Model[TResource]['Read'],
-						NonNullable<TParams['options']>
-					>
-				> &
-					PickExpanded<
-						Model[TResource]['Read'],
-						ExpandPropsOf<
-							Model[TResource]['Read'],
-							NonNullable<TParams['options']>
-						>
-					>
+			OptionsToResponse<
+				Model[TResource]['Read'],
+				NonNullable<TParams['options']>,
+				TParams['id']
 			>
 		>
 	>;
-	public get<TResource extends StringKeyOf<Model>>(
-		params: { resource: TResource } & Omit<Params<Model[TResource]>, 'id'>,
-	): PromiseResult<NoInfer<Array<Model[TResource]['Read']>>>;
 	/**
 	 * @deprecated GETing via `url` is deprecated
 	 */
