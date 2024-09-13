@@ -23,8 +23,8 @@
     "build/"
   ],
   "engines": {
-    "node": ">=16.13.0",
-    "npm": ">=8.0.0"
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
   },
   "scripts": {
     "build": "npm run lint && tsc",
