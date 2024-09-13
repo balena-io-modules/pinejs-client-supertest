@@ -52,7 +52,7 @@ type ExpandToResponse<
 				>;
 			}
 		: // If no $expand is provided, no properties are expanded
-			// eslint-disable-next-line @typescript-eslint/ban-types -- We do want an empty object but `Record<string, never>` doesn't work because things breaks after it's used in a union, needs investigation
+			// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- We do want an empty object but `Record<string, never>` doesn't work because things breaks after it's used in a union, needs investigation
 			{};
 
 // Check if two types are exactly equal, useful for checking against eg exactly `any`
@@ -212,7 +212,7 @@ export class PineTest<
 			url: NonNullable<Params<T>['url']>;
 		} & Params<T>,
 	): PromiseResult<void>;
-	public put(params: Params<AnyResource>): PromiseResult<void> {
+	public put(params: Params): PromiseResult<void> {
 		return super.put(
 			params as Parameters<PinejsClientCore<unknown, Model>['put']>[0],
 		) as PromiseResult<
@@ -232,7 +232,7 @@ export class PineTest<
 			url: NonNullable<Params<T>['url']>;
 		} & Params<T>,
 	): PromiseResult<void>;
-	public patch(params: Params<AnyResource>): PromiseResult<void> {
+	public patch(params: Params): PromiseResult<void> {
 		return super.patch(
 			params as Parameters<PinejsClientCore<unknown, Model>['patch']>[0],
 		) as PromiseResult<
@@ -252,7 +252,7 @@ export class PineTest<
 			url: NonNullable<Params<T>['url']>;
 		} & Params<T>,
 	): PromiseResult<AnyObject>;
-	public post(params: Params<AnyResource>): PromiseResult<AnyObject> {
+	public post(params: Params): PromiseResult<AnyObject> {
 		return super.post(
 			params as Parameters<PinejsClientCore<unknown, Model>['post']>[0],
 		) as PromiseResult<
@@ -272,7 +272,7 @@ export class PineTest<
 			url: NonNullable<Params<T>['url']>;
 		} & Params<T>,
 	): PromiseResult<void>;
-	public delete(params: Params<AnyResource>): PromiseResult<void> {
+	public delete(params: Params): PromiseResult<void> {
 		return super.delete(
 			params as Parameters<PinejsClientCore<unknown, Model>['delete']>[0],
 		) as PromiseResult<
@@ -290,8 +290,8 @@ export class PineTest<
 
 	public request(
 		...args: Parameters<PinejsClientCore<unknown, Model>['request']>
-	): PromiseResult<any> {
-		return super.request(...args) as PromiseResult<any>;
+	): PromiseResult {
+		return super.request(...args) as PromiseResult;
 	}
 
 	protected callWithRetry<T>(
