@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update @balena/lint to 9.x
+      hash: 4d7707b7626246f7a458b70f0011ab4b212df13e
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 2.1.4
+  title: ""
+  date: 2024-09-13T12:41:54.985Z
+- commits:
     - subject: Copy `pinejs-client-core`s `OptionsToResponse` to reduce overloads for
         `get`
       hash: e79423a2a2317c7eba2935e857de76aa5752759a
