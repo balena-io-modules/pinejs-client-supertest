@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
+		"module": "Node16",
 		"outDir": "build",
 		"noImplicitAny": true,
 		"noUnusedParameters": true,
@@ -8,7 +8,7 @@
 		"removeComments": true,
 		"sourceMap": true,
 		"strictNullChecks": true,
-		"target": "es2021",
+		"target": "es2023",
 		"declaration": true,
 		"skipLibCheck": true
 	},

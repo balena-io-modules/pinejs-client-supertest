@@ -2,9 +2,8 @@ import type {
 	AnyObject,
 	AnyResource,
 	ConstructorParams,
-	ODataOptions,
+	OptionsToResponse,
 	Params,
-	PromiseResultTypes,
 	Resource,
 	RetryParameters,
 } from 'pinejs-client-core';
@@ -16,82 +15,7 @@ import { expect } from './chai';
 import type { UserParam, Overwrite } from './common';
 import type { PickDeferred } from '@balena/abstract-sql-to-typescript';
 
-type Expanded<T> = Extract<T, Array<Resource['Read']>>;
 type StringKeyOf<T> = keyof T & string;
-type SelectPropsOf<T extends Resource['Read'], U extends ODataOptions<T>> =
-	U['$select'] extends ReadonlyArray<StringKeyOf<T>>
-		? U['$select'][number]
-		: U['$select'] extends StringKeyOf<T>
-			? U['$select']
-			: // If no $select is provided, all properties that are not $expanded are selected
-				Exclude<StringKeyOf<T>, ExpandPropsOf<T, U>>;
-type ExpandPropsOf<
-	T extends Resource['Read'],
-	U extends ODataOptions<T>,
-> = U['$expand'] extends { [key in StringKeyOf<T>]?: any }
-	? StringKeyOf<U['$expand']>
-	: U['$expand'] extends ReadonlyArray<StringKeyOf<T>>
-		? U['$expand'][number]
-		: // If no $expand is provided, no properties are expanded
-			never;
-type ExpandToResponse<
-	T extends Resource['Read'],
-	U extends ODataOptions<T>,
-> = U['$expand'] extends { [key in StringKeyOf<T>]?: any }
-	? {
-			[P in keyof U['$expand']]-?: OptionsToResponse<
-				Expanded<T[P & string]>[number],
-				U['$expand'][P],
-				undefined
-			>;
-		}
-	: U['$expand'] extends ReadonlyArray<StringKeyOf<T>>
-		? {
-				[P in U['$expand'][number]]-?: Array<
-					PickDeferred<Expanded<T[P]>[number]>
-				>;
-			}
-		: // If no $expand is provided, no properties are expanded
-			// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- We do want an empty object but `Record<string, never>` doesn't work because things breaks after it's used in a union, needs investigation
-			{};
-
-// Check if two types are exactly equal, useful for checking against eg exactly `any`
-type Equals<X, Y> =
-	(<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
-		? true
-		: false;
-
-type BaseResourceId =
-	| string
-	| number
-	| Date
-	| {
-			'@': string;
-	  };
-type ResourceAlternateKey<T extends Resource['Read']> = {
-	[key in StringKeyOf<T>]?: BaseResourceId;
-};
-type ResourceId<T extends Resource['Read']> =
-	| BaseResourceId
-	| ResourceAlternateKey<T>;
-
-export type OptionsToResponse<
-	T extends Resource['Read'],
-	U extends ODataOptions<T>,
-	ID extends ResourceId<T> | undefined,
-> = U extends {
-	$count: ODataOptions<T>['$count'];
-}
-	? number
-	: Equals<ID, any> extends true
-		?
-				| (PickDeferred<T, SelectPropsOf<T, U>> & ExpandToResponse<T, U>)
-				| undefined
-		: ID extends ResourceId<T>
-			?
-					| (PickDeferred<T, SelectPropsOf<T, U>> & ExpandToResponse<T, U>)
-					| undefined
-			: Array<PickDeferred<T, SelectPropsOf<T, U>> & ExpandToResponse<T, U>>;
 
 type supportedMethod = 'get' | 'put' | 'patch' | 'post' | 'delete';
 
@@ -139,7 +63,7 @@ export class PineTest<
 	} = {
 		[key in string]: AnyResource;
 	},
-> extends PinejsClientCore<unknown, Model> {
+> extends PinejsClientCore<Model> {
 	constructor(
 		params: ConstructorParams,
 		public backendParams: BackendParams,
@@ -163,32 +87,18 @@ export class PineTest<
 			>
 		>
 	>;
-	/**
-	 * @deprecated GETing via `url` is deprecated
-	 */
-	public get<T extends Resource = AnyResource>(
-		params: {
-			resource?: undefined;
-			url: NonNullable<Params<T>['url']>;
-		} & Params<T>,
-	): PromiseResult<PromiseResultTypes>;
 	public get<T = any>(params: Params): PromiseResult<T>;
 	public get<T = any>(params: Params): PromiseResult<T> {
-		// Use a different const, since if we just re-assign `params`
-		// inside the `expect(() => {})` TS forgets that it's ensured
-		// to be a ParamsObj and will complain.
-		const normalizedParams =
-			typeof params === 'string' ? { url: params } : params;
-		normalizedParams.method = 'GET';
+		params.method = 'GET';
 
-		return this.request(normalizedParams).expect((response) => {
+		return this.request(params).expect((response) => {
 			const { error, body } = response;
 			if (error) {
 				return;
 			}
 
 			expect(() => {
-				const resultBody = this.transformGetResult(normalizedParams)(body);
+				const resultBody = this.transformGetResult(params, body);
 				// We need to use Object.defineProperty in order to be able to set undefined
 				// as the response body value, since superagent uses a getter which re-parses
 				// the body whenever it is undefined.
@@ -202,82 +112,34 @@ export class PineTest<
 
 	public put<TResource extends StringKeyOf<Model>>(
 		params: { resource: TResource; url?: undefined } & Params<Model[TResource]>,
-	): PromiseResult<void>;
-	/**
-	 * @deprecated PUTing via `url` is deprecated
-	 */
-	public put<T extends Resource = AnyResource>(
-		params: {
-			resource?: undefined;
-			url: NonNullable<Params<T>['url']>;
-		} & Params<T>,
-	): PromiseResult<void>;
-	public put(params: Params): PromiseResult<void> {
+	): PromiseResult<void> {
 		return super.put(
-			params as Parameters<PinejsClientCore<unknown, Model>['put']>[0],
-		) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<unknown, Model>['put']>
-		>;
+			params as Parameters<PinejsClientCore<Model>['put']>[0],
+		) as PromiseResult<ResolvableReturnType<PinejsClientCore<Model>['put']>>;
 	}
 
 	public patch<TResource extends StringKeyOf<Model>>(
 		params: { resource: TResource; url?: undefined } & Params<Model[TResource]>,
-	): PromiseResult<void>;
-	/**
-	 * @deprecated PATCHing via `url` is deprecated
-	 */
-	public patch<T extends Resource = AnyResource>(
-		params: {
-			resource?: undefined;
-			url: NonNullable<Params<T>['url']>;
-		} & Params<T>,
-	): PromiseResult<void>;
-	public patch(params: Params): PromiseResult<void> {
+	): PromiseResult<void> {
 		return super.patch(
-			params as Parameters<PinejsClientCore<unknown, Model>['patch']>[0],
-		) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<unknown, Model>['patch']>
-		>;
+			params as Parameters<PinejsClientCore<Model>['patch']>[0],
+		) as PromiseResult<ResolvableReturnType<PinejsClientCore<Model>['patch']>>;
 	}
 
 	public post<TResource extends StringKeyOf<Model>>(
 		params: { resource: TResource } & Params<Model[TResource]>,
-	): PromiseResult<PickDeferred<Model[TResource]['Read']>>;
-	/**
-	 * @deprecated POSTing via `url` is deprecated
-	 */
-	public post<T extends Resource = AnyResource>(
-		params: {
-			resource?: undefined;
-			url: NonNullable<Params<T>['url']>;
-		} & Params<T>,
-	): PromiseResult<AnyObject>;
-	public post(params: Params): PromiseResult<AnyObject> {
+	): PromiseResult<PickDeferred<Model[TResource]['Read']>> {
 		return super.post(
-			params as Parameters<PinejsClientCore<unknown, Model>['post']>[0],
-		) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<unknown, Model>['post']>
-		>;
+			params as Parameters<PinejsClientCore<Model>['post']>[0],
+		) as PromiseResult<ResolvableReturnType<PinejsClientCore<Model>['post']>>;
 	}
 
 	public delete<TResource extends StringKeyOf<Model>>(
 		params: { resource: TResource } & Params<Model[TResource]>,
-	): PromiseResult<void>;
-	/**
-	 * @deprecated DELETEing via `url` is deprecated
-	 */
-	public delete<T extends Resource = AnyResource>(
-		params: {
-			resource?: undefined;
-			url: NonNullable<Params<T>['url']>;
-		} & Params<T>,
-	): PromiseResult<void>;
-	public delete(params: Params): PromiseResult<void> {
+	): PromiseResult<void> {
 		return super.delete(
-			params as Parameters<PinejsClientCore<unknown, Model>['delete']>[0],
-		) as PromiseResult<
-			ResolvableReturnType<PinejsClientCore<unknown, Model>['delete']>
-		>;
+			params as Parameters<PinejsClientCore<Model>['delete']>[0],
+		) as PromiseResult<ResolvableReturnType<PinejsClientCore<Model>['delete']>>;
 	}
 
 	public upsert(): never {
@@ -289,7 +151,7 @@ export class PineTest<
 	}
 
 	public request(
-		...args: Parameters<PinejsClientCore<unknown, Model>['request']>
+		...args: Parameters<PinejsClientCore<Model>['request']>
 	): PromiseResult {
 		return super.request(...args) as PromiseResult;
 	}
