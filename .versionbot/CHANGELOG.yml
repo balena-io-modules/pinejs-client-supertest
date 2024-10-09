@@ -1,4 +1,46 @@
 - commits:
+    - subject: Update dependencies
+      hash: a8d338d760250970bc9507843363997832b337d3
+      body: |
+        Update pinejs-client-core from 8.0.1 to 8.1.1
+        Update @balena/abstract-sql-to-typescript from 4.0.6 to 5.0.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested:
+        - commits:
+            - subject: Update @balena/abstract-sql-to-typescript to 5.0.0
+              hash: cdea88ba8c8ce13513b3e4400a8035c1957c8307
+              body: |
+                Update @balena/abstract-sql-to-typescript from 4.0.9 to 5.0.0
+
+                Chose a patch change type since this is a
+                type only import.
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Thodoris Greasidis
+              nested: []
+          version: pinejs-client-js-8.1.1
+          title: ""
+          date: 2024-10-09T14:28:39.149Z
+        - commits:
+            - subject: Add support for calling odata fns
+              hash: befd5b25dc3c8f2d663c138255c68e4108abf8c9
+              body: ""
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Otavio Jacobi
+              nested: []
+          version: pinejs-client-js-8.1.0
+          title: ""
+          date: 2024-10-09T13:01:51.754Z
+  version: 3.0.1
+  title: ""
+  date: 2024-10-09T14:43:59.582Z
+- commits:
     - subject: Switch to Node16 module resolution
       hash: 2635fc736753cf5a01454119dc0929f1f3197161
       body: ""
