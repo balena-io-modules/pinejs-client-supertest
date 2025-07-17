@@ -1,4 +1,47 @@
 - commits:
+    - subject: Add support for odata actions
+      hash: c74b7045713801a47d32bbb792e46ef15e9aab1d
+      body: |
+        Update pinejs-client-core from 8.2.0 to 8.3.0
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Otavio Jacobi
+      nested:
+        - commits:
+            - subject: Add support to odata-actions
+              hash: 2bbb89d841a0122a069f1b89aac3503b38880ee5
+              body: ""
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Otavio Jacobi
+              nested: []
+          version: pinejs-client-js-8.3.0
+          title: ""
+          date: 2025-07-17T14:02:58.283Z
+        - commits:
+            - subject: Safely access 'id' of Params to avoid `unknown` propagation
+              hash: 2ce99460c2385b3cd98935a6b5cbb1a876242e6b
+              body: >
+                When resolving the typings of a query, if the id is not present
+                and we try to access it anyway
+
+                typescript will infer `unknown`, which caused
+                `OptionsToResponse` to satisfy as if ID was present (thus,
+                turning it into a query with `id`)
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Otavio Jacobi
+              nested: []
+          version: pinejs-client-js-8.2.1
+          title: ""
+          date: 2025-07-04T16:23:19.320Z
+  version: 3.1.0
+  title: ""
+  date: 2025-07-17T15:02:32.767Z
+- commits:
     - subject: Fix linter
       hash: 604e77b129aab77acc91847efffcb549cef0975d
       body: ""
