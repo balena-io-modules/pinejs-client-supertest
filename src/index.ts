@@ -1,4 +1,5 @@
 import type {
+	ActionParams,
 	AnyObject,
 	AnyResource,
 	ConstructorParams,
@@ -127,7 +128,14 @@ export class PineTest<
 	}
 
 	public post<TResource extends StringKeyOf<Model>>(
+		params: { resource: TResource } & ActionParams &
+			Omit<Params<Model[TResource]>, 'method' | 'url' | 'body'>,
+	): PromiseResult<unknown>;
+	public post<TResource extends StringKeyOf<Model>>(
 		params: { resource: TResource } & Params<Model[TResource]>,
+	): PromiseResult<PickDeferred<Model[TResource]['Read']>>;
+	public post<TResource extends StringKeyOf<Model>>(
+		params: { resource: TResource } & ActionParams & Params<Model[TResource]>,
 	): PromiseResult<PickDeferred<Model[TResource]['Read']>> {
 		return super.post(
 			params as Parameters<PinejsClientCore<Model>['post']>[0],
