@@ -1,4 +1,16 @@
 - commits:
+    - subject: Fix linter
+      hash: 604e77b129aab77acc91847efffcb549cef0975d
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Otavio Jacobi
+      nested: []
+  version: 3.0.2
+  title: ""
+  date: 2025-07-17T14:48:09.553Z
+- commits:
     - subject: Update dependencies
       hash: a8d338d760250970bc9507843363997832b337d3
       body: |
