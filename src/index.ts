@@ -14,7 +14,9 @@ import type { CallbackHandler, Response, Test } from 'supertest';
 import supertest from './supertest';
 import { expect } from './chai';
 import type { UserParam, Overwrite } from './common';
-import type { PickDeferred } from '@balena/abstract-sql-to-typescript' with { 'resolution-mode': 'import' };
+import type { PickDeferred } from '@balena/abstract-sql-to-typescript' with {
+	'resolution-mode': 'import',
+};
 
 type StringKeyOf<T> = keyof T & string;
 
