@@ -116,17 +116,17 @@ export class PineTest<
 	public put<TResource extends StringKeyOf<Model>>(
 		params: { resource: TResource; url?: undefined } & Params<Model[TResource]>,
 	): PromiseResult<void> {
-		return super.put(
-			params as Parameters<PinejsClientCore<Model>['put']>[0],
-		) as PromiseResult<ResolvableReturnType<PinejsClientCore<Model>['put']>>;
+		return super.put(params) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<Model>['put']>
+		>;
 	}
 
 	public patch<TResource extends StringKeyOf<Model>>(
 		params: { resource: TResource; url?: undefined } & Params<Model[TResource]>,
 	): PromiseResult<void> {
-		return super.patch(
-			params as Parameters<PinejsClientCore<Model>['patch']>[0],
-		) as PromiseResult<ResolvableReturnType<PinejsClientCore<Model>['patch']>>;
+		return super.patch(params) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<Model>['patch']>
+		>;
 	}
 
 	public post<TResource extends StringKeyOf<Model>>(
@@ -147,9 +147,9 @@ export class PineTest<
 	public delete<TResource extends StringKeyOf<Model>>(
 		params: { resource: TResource } & Params<Model[TResource]>,
 	): PromiseResult<void> {
-		return super.delete(
-			params as Parameters<PinejsClientCore<Model>['delete']>[0],
-		) as PromiseResult<ResolvableReturnType<PinejsClientCore<Model>['delete']>>;
+		return super.delete(params) as PromiseResult<
+			ResolvableReturnType<PinejsClientCore<Model>['delete']>
+		>;
 	}
 
 	public upsert(): never {
