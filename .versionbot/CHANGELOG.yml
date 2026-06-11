@@ -1,4 +1,17 @@
 - commits:
+    - subject: Pin dependencies
+      hash: 71d129c5c4a21195e7593ec5a77dd8797c4c1ecf
+      body: |
+        Update husky
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.1.4
+  title: ""
+  date: 2026-06-11T08:33:34.124Z
+- commits:
     - subject: Resolve lint errors
       hash: 5ef9c912a7875051dd07254cdfb35c4305a64765
       body: ""
