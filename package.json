@@ -39,7 +39,7 @@
     "@balena/lint": "^9.3.2",
     "husky": "9.1.7",
     "lint-staged": "17.0.7",
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   },
   "dependencies": {
     "@balena/abstract-sql-to-typescript": "^6.0.0",
