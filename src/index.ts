@@ -30,11 +30,7 @@ export type PromiseResult<T = any> = Promise<T> &
 		// Atm we can't override just the return type of a method w/o re-defining all its variants.
 		expect(
 			statusOrCheckerOrBody:
-				| number
-				| ((res: Response) => any)
-				| string
-				| RegExp
-				| object,
+				number | ((res: Response) => any) | string | RegExp | object,
 			callback?: CallbackHandler,
 		): PromiseResult<T>;
 		expect(
