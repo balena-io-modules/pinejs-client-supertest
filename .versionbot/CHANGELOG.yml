@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency flowzonify to v0.4.12
+      hash: b9d3975254e93ade61aa1cc7197881322d777399
+      body: |
+        Update flowzonify from 0.0.0 to 0.4.12
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.2.1
+  title: ""
+  date: 2026-09-28T09:10:57.251Z
+- commits:
     - subject: Update pinejs-client-core to 8.5.29
       hash: ea03ee43c6a477697dc1f1e79ce0b73be54893f2
       body: |
