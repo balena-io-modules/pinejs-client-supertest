@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency lint-staged to v17.5.1
+      hash: a4b4fa558039f31a1b806105f701c96fac935b86
+      body: |
+        Update lint-staged from 17.2.0 to 17.5.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.2.2
+  title: ""
+  date: 2026-09-28T10:12:20.805Z
+- commits:
     - subject: Update dependency flowzonify to v0.4.12
       hash: b9d3975254e93ade61aa1cc7197881322d777399
       body: |
