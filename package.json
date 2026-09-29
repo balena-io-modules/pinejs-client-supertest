@@ -1,6 +1,6 @@
 {
   "name": "pinejs-client-supertest",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "description": "This module provides the nodejs interface for the pinejs API using request.",
   "type": "commonjs",
   "main": "build/index.js",
@@ -53,6 +53,6 @@
     "supertest": "^7.2.2"
   },
   "versionist": {
-    "publishedAt": "2026-09-28T10:12:20.947Z"
+    "publishedAt": "2026-09-29T09:09:10.415Z"
   }
 }
