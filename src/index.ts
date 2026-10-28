@@ -85,6 +85,11 @@ export class PineTest<
 	>;
 	public get<T = any>(params: Params): PromiseResult<T>;
 	public get<T = any>(params: Params): PromiseResult<T> {
+		if (params.url != null) {
+			throw new Error(
+				'Passing `url` to `get` has been removed, please use a query object instead or use `request` directly.',
+			);
+		}
 		params.method = 'GET';
 
 		return this.request(params).expect((response) => {
