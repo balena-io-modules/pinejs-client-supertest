@@ -156,6 +156,16 @@ export class PineTest<
 		throw new Error('getOrCreate is not supported by pinejs-client-supertest');
 	}
 
+	// The core implementations await `request` and expect the parsed body,
+	// but here that resolves to the supertest response.
+	public prepare(): never {
+		throw new Error('prepare is not supported by pinejs-client-supertest');
+	}
+
+	public subscribe(): never {
+		throw new Error('subscribe is not supported by pinejs-client-supertest');
+	}
+
 	public request(
 		...args: Parameters<PinejsClientCore<Model>['request']>
 	): PromiseResult {
