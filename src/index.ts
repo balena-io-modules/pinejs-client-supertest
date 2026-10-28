@@ -12,7 +12,6 @@ import { PinejsClientCore } from 'pinejs-client-core';
 import type * as express from 'express';
 import type { CallbackHandler, Response, Test } from 'supertest';
 import supertest from './supertest.ts';
-import { expect } from './chai.ts';
 import type { UserParam, Overwrite } from './common.ts';
 import type { PickDeferred } from '@balena/abstract-sql-to-typescript';
 
@@ -94,16 +93,14 @@ export class PineTest<
 				return;
 			}
 
-			expect(() => {
-				const resultBody = this.transformGetResult(params, body);
-				// We need to use Object.defineProperty in order to be able to set undefined
-				// as the response body value, since superagent uses a getter which re-parses
-				// the body whenever it is undefined.
-				// See: https://github.com/ladjs/superagent/blob/1c8338b2e0a3b8f604d08acc7f3cbe305be1e571/src/node/response.js#L54
-				Object.defineProperty(response, 'body', {
-					value: resultBody,
-				});
-			}).to.not.throw();
+			const resultBody = this.transformGetResult(params, body);
+			// We need to use Object.defineProperty in order to be able to set undefined
+			// as the response body value, since superagent uses a getter which re-parses
+			// the body whenever it is undefined.
+			// See: https://github.com/ladjs/superagent/blob/1c8338b2e0a3b8f604d08acc7f3cbe305be1e571/src/node/response.js#L54
+			Object.defineProperty(response, 'body', {
+				value: resultBody,
+			});
 		}) as PromiseResult<T>;
 	}
 
