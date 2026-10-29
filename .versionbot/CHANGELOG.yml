@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency @types/supertest to v7
+      hash: 9ed1b1110c3dd1e1f95849a62f7af6f216d5181d
+      body: |
+        Update @types/supertest from 6.0.3 to 7.2.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.2.4
+  title: ""
+  date: 2026-10-29T00:58:09.996Z
+- commits:
     - subject: Update dependency lint-staged to v17.6.0
       hash: a41fb051ee7c7148e8a348c721f842800c077364
       body: |
