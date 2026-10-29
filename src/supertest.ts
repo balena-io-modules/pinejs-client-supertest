@@ -1,6 +1,6 @@
 import type * as express from 'express';
 import * as supertest from 'supertest';
-import type { UserParam } from './common';
+import type { UserParam } from './common.ts';
 
 export default function (app: express.Express | string, user?: UserParam) {
 	// Can be an object with `token`, a JWT string or an API key string

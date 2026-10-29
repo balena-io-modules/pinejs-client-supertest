@@ -2,9 +2,15 @@
   "name": "pinejs-client-supertest",
   "version": "3.2.4",
   "description": "This module provides the nodejs interface for the pinejs API using request.",
-  "type": "commonjs",
+  "type": "module",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/balena-io-modules/pinejs-client-supertest.git"

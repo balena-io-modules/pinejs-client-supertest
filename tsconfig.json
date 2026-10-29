@@ -11,7 +11,10 @@
 		"strictNullChecks": true,
 		"target": "es2025",
 		"declaration": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"erasableSyntaxOnly": true,
+		"verbatimModuleSyntax": true,
+		"rewriteRelativeImportExtensions": true
 	},
 	"include": [
 		"src/*.ts"

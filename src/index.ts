@@ -11,12 +11,10 @@ import type {
 import { PinejsClientCore } from 'pinejs-client-core';
 import type * as express from 'express';
 import type { CallbackHandler, Response, Test } from 'supertest';
-import supertest from './supertest';
-import { expect } from './chai';
-import type { UserParam, Overwrite } from './common';
-import type { PickDeferred } from '@balena/abstract-sql-to-typescript' with {
-	'resolution-mode': 'import',
-};
+import supertest from './supertest.ts';
+import { expect } from './chai.ts';
+import type { UserParam, Overwrite } from './common.ts';
+import type { PickDeferred } from '@balena/abstract-sql-to-typescript';
 
 type StringKeyOf<T> = keyof T & string;
 
@@ -63,11 +61,11 @@ export class PineTest<
 		[key in string]: AnyResource;
 	},
 > extends PinejsClientCore<Model> {
-	constructor(
-		params: ConstructorParams,
-		public backendParams: BackendParams,
-	) {
+	public backendParams: BackendParams;
+
+	constructor(params: ConstructorParams, backendParams: BackendParams) {
 		super(params);
+		this.backendParams = backendParams;
 	}
 
 	public get<
