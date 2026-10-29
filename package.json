@@ -1,10 +1,16 @@
 {
   "name": "pinejs-client-supertest",
   "version": "3.2.4",
-  "description": "This module provides the nodejs interface for the pinejs API using request.",
-  "type": "commonjs",
+  "description": "This module provides the nodejs interface for the pinejs API using supertest.",
+  "type": "module",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/balena-io-modules/pinejs-client-supertest.git"
@@ -24,8 +30,8 @@
     "build/"
   ],
   "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=10.0.0"
+    "node": "^24 || >=26",
+    "npm": ">=11.0.0"
   },
   "scripts": {
     "build": "npm run lint && tsc",
@@ -37,18 +43,18 @@
   },
   "devDependencies": {
     "@balena/lint": "^9.4.6",
+    "@types/chai": "^4.3.20",
+    "@types/chai-as-promised": "^7.1.8",
+    "chai": "^4.5.0",
+    "chai-as-promised": "^7.1.2",
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
     "typescript": "6.0.3"
   },
   "dependencies": {
     "@balena/abstract-sql-to-typescript": "^6.0.0",
-    "@types/chai": "^4.3.20",
-    "@types/chai-as-promised": "^7.1.8",
     "@types/express": "^4.17.25",
     "@types/supertest": "^7.0.0",
-    "chai": "^4.5.0",
-    "chai-as-promised": "^7.1.2",
     "pinejs-client-core": "^8.5.29",
     "supertest": "^7.2.2"
   },
