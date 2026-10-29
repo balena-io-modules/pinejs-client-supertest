@@ -44,9 +44,9 @@
   "devDependencies": {
     "@balena/lint": "^9.4.6",
     "@types/chai": "^4.3.20",
-    "@types/chai-as-promised": "^7.1.8",
+    "@types/chai-as-promised": "^8.0.0",
     "chai": "^4.5.0",
-    "chai-as-promised": "^7.1.2",
+    "chai-as-promised": "^8.0.0",
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
     "typescript": "6.0.3"
