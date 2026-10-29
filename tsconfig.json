@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"module": "Node16",
+		"module": "Node20",
 		"rootDir": "./src",
 		"outDir": "build",
 		"noImplicitAny": true,
@@ -9,7 +9,7 @@
 		"removeComments": true,
 		"sourceMap": true,
 		"strictNullChecks": true,
-		"target": "es2023",
+		"target": "es2025",
 		"declaration": true,
 		"skipLibCheck": true
 	},

@@ -24,8 +24,8 @@
     "build/"
   ],
   "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=10.0.0"
+    "node": "^24 || >=26",
+    "npm": ">=11.0.0"
   },
   "scripts": {
     "build": "npm run lint && tsc",
