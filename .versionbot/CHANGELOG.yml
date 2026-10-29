@@ -1,4 +1,69 @@
 - commits:
+    - subject: Throw on the unsupported prepare and subscribe methods
+      hash: bb88533762765d927d06408afe7a1b14961e19e5
+      body: |
+        The core implementations await `request` and treat the result as the
+        parsed body, but with supertest that is the response, so a prepared GET
+        always rejected with "the 'd' property is missing", subscribe always
+        emitted that error, and prepared writes resolved with the response.
+        They now throw like `upsert` and `getOrCreate`.
+      footer:
+        Change-type: major
+        change-type: major
+      author: Pagan Gazzard
+      nested: []
+    - subject: Throw when passing a url to get, like pinejs-client-core
+      hash: a275556b7c9c0ea2bb3620a45f4e15fdea4b054f
+      body: |
+        pinejs-client-core's `get` throws when a `url` is passed since v8 and
+        the typed url overload was already dropped in 3.0.0, but the overriding
+        `get` still sent the url through the untyped overload. Use `request`
+        for raw urls instead.
+      footer:
+        Change-type: major
+        change-type: major
+      author: Pagan Gazzard
+      nested: []
+    - subject: Drop chai and report get transform errors directly
+      hash: fd0a1e458b0d8201df2d031530f91d3507130a3d
+      body: |
+        The body transform in `get` was wrapped in chai's
+        `expect(fn).to.not.throw()`, which only replaced eg "Returned multiple
+        results when only one was expected." with a truncated "expected
+        [Function] to not throw an error but 'Error: Returned multiple results
+        when…' was thrown". supertest already turns an error thrown by an
+        `expect` callback into the request error, so the original error is now
+        thrown as-is.
+
+        This moves chai, chai-as-promised and their types to the
+        devDependencies, as only the tests use them now, so consumers using a
+        newer chai no longer install a nested copy. Importing this module no
+        longer registers chai-as-promised on chai 4 as a side effect.
+      footer:
+        Change-type: major
+        change-type: major
+      author: Pagan Gazzard
+      nested: []
+    - subject: Convert to ESM
+      hash: d5856e9f92b83338b2e9a5427414117691a6feb6
+      body: ""
+      footer:
+        Change-type: major
+        change-type: major
+      author: Pagan Gazzard
+      nested: []
+    - subject: Set minimum supported nodejs version to 24.x
+      hash: b1dbd63dc9e99007e1670f497f9903299ecc71ae
+      body: ""
+      footer:
+        Change-type: major
+        change-type: major
+      author: Pagan Gazzard
+      nested: []
+  version: 4.0.0
+  title: ""
+  date: 2026-10-29T04:33:09.416Z
+- commits:
     - subject: Update dependency @types/supertest to v7
       hash: 9ed1b1110c3dd1e1f95849a62f7af6f216d5181d
       body: |
