@@ -44,7 +44,7 @@
   "devDependencies": {
     "@balena/lint": "^9.4.6",
     "@types/chai": "^4.3.20",
-    "chai": "^4.5.0",
+    "chai": "^6.0.0",
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
     "mockttp": "4.6.4",
