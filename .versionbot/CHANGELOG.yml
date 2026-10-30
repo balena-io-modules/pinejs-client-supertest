@@ -1,4 +1,21 @@
 - commits:
+    - subject: Add a node:test test suite
+      hash: 448648f460a6a764199040ccc7f973781c75a314
+      body: |
+        The tests run against the compiled `build/` using node's native type
+        stripping (`node --test test/*.test.ts`), with chai's expect style
+        assertions (plus chai-as-promised) and a mockttp server as the PineTest
+        `app`. `test/types.test-d.ts` holds compile-time only assertions that
+        are checked by `tsc -p tsconfig.test.json`.
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 4.0.1
+  title: ""
+  date: 2026-10-30T12:27:27.000Z
+- commits:
     - subject: Throw on the unsupported prepare and subscribe methods
       hash: bb88533762765d927d06408afe7a1b14961e19e5
       body: |
