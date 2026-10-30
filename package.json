@@ -35,20 +35,19 @@
   },
   "scripts": {
     "build": "npm run lint && tsc",
-    "lint": "balena-lint src",
-    "lint-fix": "balena-lint --fix src",
-    "test": "npm run build",
+    "lint": "balena-lint -t tsconfig.test.json src test",
+    "lint-fix": "balena-lint -t tsconfig.test.json --fix src test",
+    "test": "npm run build && tsc -p tsconfig.test.json && node --test test/*.test.ts",
     "prepack": "npm run build",
     "prepare": "node -e \"try { (await import('husky')).default() } catch (e) { if (e.code !== 'ERR_MODULE_NOT_FOUND') throw e }\" --input-type module"
   },
   "devDependencies": {
     "@balena/lint": "^9.4.6",
     "@types/chai": "^4.3.20",
-    "@types/chai-as-promised": "^7.1.8",
     "chai": "^4.5.0",
-    "chai-as-promised": "^7.1.2",
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
+    "mockttp": "4.6.4",
     "typescript": "6.0.3"
   },
   "dependencies": {
