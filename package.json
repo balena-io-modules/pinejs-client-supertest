@@ -42,7 +42,7 @@
     "prepare": "node -e \"try { (await import('husky')).default() } catch (e) { if (e.code !== 'ERR_MODULE_NOT_FOUND') throw e }\" --input-type module"
   },
   "devDependencies": {
-    "@balena/lint": "^11.0.0",
+    "@balena/lint": "^11.1.0",
     "@types/chai": "^5.0.0",
     "chai": "^6.0.0",
     "husky": "9.1.7",
