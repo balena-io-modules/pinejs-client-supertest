@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises -- node:test's describe/it return promises that the runner already tracks */
 import { after, afterEach, before, describe, it } from 'node:test';
 import * as mockttp from 'mockttp';
 import { PineTest } from '../build/index.js';
