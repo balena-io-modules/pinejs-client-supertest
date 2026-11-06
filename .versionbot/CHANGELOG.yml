@@ -1,4 +1,18 @@
 - commits:
+    - subject: Update @balena/lint to 11.1.0
+      hash: cda3c479cf4000b41d81ec9e7ab092b86ef44ae4
+      body: |
+        11.1.0 no longer flags `describe`/`it` from `node:test` as floating
+        promises, so drop the `eslint-disable` headers from the test files.
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 4.0.5
+  title: ""
+  date: 2026-11-06T09:50:50.187Z
+- commits:
     - subject: Update dependency @types/chai to v5
       hash: 11fc753e5dedab70207bd79d3915c03f5e929693
       body: |
