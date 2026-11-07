@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency mockttp to v4.6.5
+      hash: cfce2aaa62d86d1b3d6a077e710b690dd11d881c
+      body: |
+        Update mockttp from 4.6.4 to 4.6.5
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 4.0.7
+  title: ""
+  date: 2026-11-07T02:05:02.142Z
+- commits:
     - subject: Pin dependencies
       hash: 80a43a1775dc54836b5ac6eeccbfb2386891b85a
       body: |
