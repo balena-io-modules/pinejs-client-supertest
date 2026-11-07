@@ -47,7 +47,7 @@
     "chai": "6.3.0",
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
-    "mockttp": "4.6.4",
+    "mockttp": "4.6.5",
     "typescript": "6.0.3"
   },
   "dependencies": {
