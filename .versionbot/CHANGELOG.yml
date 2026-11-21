@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency lint-staged to v17.6.1
+      hash: 7211cc86171b53d5ddbc73b2731d501fba26585d
+      body: |
+        Update lint-staged from 17.6.0 to 17.6.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 4.0.8
+  title: ""
+  date: 2026-11-21T01:09:24.847Z
+- commits:
     - subject: Update dependency mockttp to v4.6.5
       hash: cfce2aaa62d86d1b3d6a077e710b690dd11d881c
       body: |
